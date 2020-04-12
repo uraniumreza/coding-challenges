@@ -3,7 +3,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 # Problems by Days
 
-12.  [Last Stone Weight](#12.last-stone-weight)
+12.  [Last Stone Weight](#12-last-stone-weight)
 
 # 12. Last Stone Weight
 
