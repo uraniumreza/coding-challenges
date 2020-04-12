@@ -7,7 +7,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 # 12. Last Stone Weight
 
-> LeetCode: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3297/
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3297/
 
 ## Solution Approach
 After reading the problem statement, the first thing that hit my head was using `max-heap` because every-time we'll pick the **heaviest** stones from the collection and sometimes we'll put a new stone to the collection but the collection needs to be sorted in non-increasing order. We know that in c++ `Priority Queues` are a type of container adapters, which specifically designed such that the first element of the queue is the greatest of all elements in the queue and all the elements are in decreasing order(but we can create our custom priority queue where priority will be dependent on different factors rather than the *max* property).
