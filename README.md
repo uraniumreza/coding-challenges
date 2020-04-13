@@ -4,6 +4,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 # Problems by Days
 
 1. [Single Number](#1-single-number)
+2. [Happy Number](#2-happy-number)
 12. [Last Stone Weight](#12-last-stone-weight)
 13. [Contiguous Array](#13-contiguous-array)
 
@@ -43,6 +44,55 @@ We're traversing the array once, so the worst-case time complexity will be the l
 
 ### Space Complexity `O(1)`
 This solution has constant space complexity as we're using any additional data structure
+
+
+# 2. Happy Number
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3284/
+
+## Solution Approach
+First, we need to clearly understand what is a *Happy Number* because that's the core of the problem. So, we need to run a loop and in each iteration to generate the sum of the squares of each digit of the number and that sum will be treated as the new value of the number in the next iteration. So, when that sum value will be 1, we can say that it's a *Happy Number* but what if we are not getting 1 ever! In the problem description, it says when a number is not *happy* it **loops endlessly in a cycle**. That's our logic to find the *unhappy* numbers. We'll keep track of the numbers we are generating in each iteration of the loop to a `HashMap` and check if the newly generated number is already there in the `HashMap`, if it exists then we can say for sure that an endless loop will occur and then immediately return that the number is *unhappy*
+
+```cpp
+class Solution {
+public:
+    int getSquareOfDigits(int n) {
+        int sum = 0;
+
+        while(n) {
+            int p = n % 10;
+            sum += (p * p);
+            n /= 10;
+        }
+
+        return sum;
+    }
+
+    bool isHappy(int n) {
+        unordered_map<int, int> M;
+
+        int newNumber = n;
+        M[newNumber] = 1;
+        while(newNumber != 1) {
+            newNumber = getSquareOfDigits(newNumber);
+            if(M.find(newNumber) == M.end()) M[newNumber] = 1;
+            else return false;
+        }
+
+        return true;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(*)` [WIP]
+First, we need to calculate the time-complexity of `getSquareOfDigits()`; because in the main loop we're executing that function in every iteration. We're getting the squares of each digit of `n` which suffice that the loop of getting the square of digits take `O(logn)` time.
+
+But finding the overall time-complexity of the `isHappy()` function seems a bit trickier; skipping it for now (will update it later)
+
+### Space Complexity `O(*)` [WIP]
+skipping it for now (will update it later)
 
 
 # 12. Last Stone Weight
