@@ -1,5 +1,5 @@
 # leetcode-30days-challenge
-With many of us around the world being encouraged to stay indoors and work from home, LeetCode though this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, LeetCode is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020.
+With many of us around the world being encouraged to stay indoors and work from home, [LeetCode](https://leetcode.com) thought this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, `LeetCode` is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020. This is basically my journal where I'm dumping the solutions each day and how I'm thinking about the problems and the process of the solution. Also trying to add complexity(time, space) analysis of the the solutions that I have attached.
 
 # Problems by Days
 
