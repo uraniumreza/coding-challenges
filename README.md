@@ -3,8 +3,47 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 # Problems by Days
 
+1. [Single Number](#1-single-number)
 12. [Last Stone Weight](#12-last-stone-weight)
 13. [Contiguous Array](#13-contiguous-array)
+
+
+# 1. Problem Name
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3283/
+
+## Solution Approach
+The first day of leetcode-30day-challenge and they got a very easy problem here! But two things need to be noted though -
+
+1. The algorithm should have a linear runtime complexity
+2. Implement it without using any extra space/memory
+
+So, the first solution I thought was to use a **HashMap** to keep how many times a number presents in the array and from thereafter traversing all the entries of the hashmap we can easily find which number presents only once in the array. Her, we're obeying note 1 but violating note 2.
+
+To follow both of the notes; we'll implement a solution that includes the technique of binary operations. We know that `XOR` operator gives us `FALSE` or 0 when both of the operands are the same, right? If we can run `XOR` operation to all the values of the array and keep it in a `result` variable; finally we'll get the lonely/orphan value in the result which presents in the array once. Because `XOR` minus out the same values which exist twice in the array by returning 0. And any value `XOR`s with 0 returns the same value, that's why we will get our result in the variable which is used to do all the binary operations on the array values.
+
+```cpp
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int result = 0;
+        for(int n : nums) {
+            result ^= n;
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+We're traversing the array once, so the worst-case time complexity will be the length of the array
+
+### Space Complexity `O(1)`
+This solution has constant space complexity as we're using any additional data structure
+
 
 # 12. Last Stone Weight
 
