@@ -3,7 +3,8 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 # Problems by Days
 
-12.  [Last Stone Weight](#12-last-stone-weight)
+12. [Last Stone Weight](#12-last-stone-weight)
+13. [Contiguous Array](#13-contiguous-array)
 
 # 12. Last Stone Weight
 
@@ -59,3 +60,49 @@ Our final loop which iterates over the priority queue runs up to `n - 1` times. 
 
 ### Space Complexity `O(n)`
 We have linear space complexity here because of declaring `n` sized priority queue.
+
+# 13. Contiguous Array
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3298/
+
+## Solution Approach
+Whenever we encounter any subarray related problems; the ready-made bruteforce approach of time complexity `O(n^2)` solution automatically comes into our head! I was quite confident that I can code that solution and eventually did but got **TLE**. So, finally, the solution that I implemented got **AC** was a classic counting approach!
+
+We have a binary-array i.e. the array contains only 1's and 0's; we'll have a `count` variable and traversing through the array in each iteration we'll modify the value of the count regarding the value of the array. If we encounter 1 then we'll increment and for 0 we'll decrement the count. Now, maybe you are thinking like what are we getting from this count thing? So, the interesting part of this solution approach is this - whenever we encounter the same `count` value, that means we have a subarray of the same number of 1's and 0's and that's why the `count` becomes same again, right? To memorize every count value and their array-indexes we need some sort of data-structure. I've chosen HashMap to store count as key and index of the array as value. In this way whenever we find that we have a `count` that we encountered previously (i.e. exists in the hashmap) we can update our result by checking if it can beat the previous maximum length of the subarray.
+
+```cpp
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        unordered_map<int, int> M;
+        int len = nums.size(), result = 0, count = 0;
+
+        /*
+            why we're putting this here? Because we need to keep track of
+            the initial count, because our count value can come to 0/initial
+            value again, right? Then we can find the length of subarray by
+            simply subtracting the indexes
+        */
+        M[count] = -1;
+        for(int i = 0; i < len; i++) {
+            count += nums[i] == 0 ? -1 : 1;
+
+            if(M.find(count) != M.end()) {
+                result = max(result, i - M[count]);
+            } else {
+                M[count] = i;
+            }
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+We're only traversing the array once; so the time complexity will be the length of the array.
+
+### Space Complexity `O(n)`
+We've added a hashmap to keep track of our count values and array-indexes. In the worst case where each value of the array is either 0 or 1, then the length of the hashmap will be the length of the array.
