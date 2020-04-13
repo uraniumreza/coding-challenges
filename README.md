@@ -9,7 +9,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 13. [Contiguous Array](#13-contiguous-array)
 
 
-# 1. Problem Name
+# 1. Single Number
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3283/
 
