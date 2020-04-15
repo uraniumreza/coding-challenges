@@ -7,6 +7,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 2. [Happy Number](#2-happy-number)
 12. [Last Stone Weight](#12-last-stone-weight)
 13. [Contiguous Array](#13-contiguous-array)
+14. [Perform String Shifts](#14-perform-string-shifts)
 
 
 # 1. Single Number
@@ -195,3 +196,86 @@ We're only traversing the array once; so the time complexity will be the length 
 
 ### Space Complexity `O(n)`
 We've added a hashmap to keep track of our count values and array-indexes. In the worst case where each value of the array is either 0 or 1, then the length of the hashmap will be the length of the array.
+
+# 14. Perform String Shifts
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3299/
+
+## Solution Approach
+The problem has basically two parts; one is to find an algorithm to solve how to do the left-right shifts/rotations in a string. And other is to find the minimum number of operations(left/right shifts) that need to be done into the given string to get the final result.
+
+So, first, we'll be figuring out the algorithm to do the right and left shifts. If we can figure one out, the other will be simple because we know that one shift is a complement to another. If I say I need to do 3 amount of left shifts to a string that also suffice that I can find the same result by doing `lengthOfString - 3` number of right shifts. If you're not getting the idea here, just pick a pen and paper and do the shifts by hand, you'll definitely get it :) We'll implement the shifts in-place i.e. without using any extra data structure for storing the modified string and also which will be done in `O(L)` time-complexity. The approach is based on *reversal algorithm* for rotation. Let's deep dive into it. Say we have `abcdefg` as the given string and finally we've figured out that we need to do **3 left-shifts**. So, let's break it to a stepwise mind-map of our reversal algorithm:
+
+```
+"abcdefg"
+
+/*
+    Step 1: Break the original string into two parts,
+    first 3 (same as the amount of rotation we have to do)
+    will be one and later characters will form the other string
+*/
+"abc|defg"
+
+/*
+    Step 2: Reverse both parts of the string separately
+*/
+"cba|gfed"
+
+/*
+    Step 3: Finally reverse the whole string
+*/
+"defgabc"
+
+^ We've got it, that's our result; just cross-check it!!
+```
+
+I hope, you have got the idea! So, we'll be only writing the reversal algorithm to do the left-shift and for right-shift, we'll use the same function of left-shift.
+
+Now, we've come to the later problem, where we need to minimize the number of operations we'll do over the given string. So, we know left-shift and right-shift complements each other. So, in our given matrix of `shift` we've got multiple entries of both right and left shifts. We need to find the final number of shifts that actually matters, right? Cause there will be so many entries where one right-shift will negate other left-shift, or vice versa. We've taken two different variables i.e. `left`, `right` to sum up all the right shifts and left shifts by traversing through our shift matrix. And then we can find the difference between them and identify which one wins (i.e. right or left either will have maximum count over other) or they draw (same number of operation in both right and left, and we don't need to do any operation in that case; yayy!). We'll do one last thing here, we'll get the modulo of the final `numberOfOperations` for getting the `finalNumberOfOperations` because think about it this way - *"When we have a string of `n` characters and we do `n` number of left/right-shifts we'll get back the same string again, gotcha?"* So, by doing modulus we are removing those `n` number of operations which really doesn't affect our original string at all!
+
+```cpp
+class Solution {
+public:
+    string stringShift(string s, vector<vector<int>>& shift) {
+        int left = 0, right = 0;
+        for(vector<int> entry : shift) {
+            if(entry[0] == 0) left += entry[1];
+            else right += entry[1];
+        }
+
+        int opCount = left - right;
+        if(opCount > 0) {
+            leftShift(abs(opCount) % s.length(), s);
+        } else {
+            rightShift(abs(opCount) % s.length(), s);
+        }
+
+        return s;
+    }
+
+    void leftShift(int amount, string& s) {
+        reverse(s.begin(), s.begin() + amount);
+        reverse(s.begin() + amount, s.end());
+        reverse(s.begin(), s.end());
+    }
+
+    void rightShift(int amount, string& s) {
+        leftShift(s.length() - amount, s);
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(N + L)`
+Our solution approach had two parts, as we have discussed above. Let's find time complexity for both parts separately and finally we'll merge them.
+
+The first step traverses through each of the N entries in the shift array, and we're adding up the total number of left shifts and the total number of right shifts. Handling each entry is an `O(1)` operation, so this first step has a total cost of `O(N)`.
+
+The second step applies a single string-shift (right/left) operation. As discussed in the solution approach that our algorithm of a string-shift operation has a cost of `O(L)`. Here, `L` is the length of the given string.
+
+As we are doing these steps one after the other, and we don't know which one is the max; `N` or `L`, we add them to get a final time complexity of `O(N + L)`
+
+### Space Complexity `O(1)`
+The first step uses constant extra space to keep track of the counts.
+And also we're doing the string-shift operation in-place by using a mutable string. So, we've taken `O(1)` space-complexity in our solution.
