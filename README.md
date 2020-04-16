@@ -8,6 +8,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 12. [Last Stone Weight](#12-last-stone-weight)
 13. [Contiguous Array](#13-contiguous-array)
 14. [Perform String Shifts](#14-perform-string-shifts)
+15. [Product of Array Except Self](#15-product-of-array-except-self)
 
 
 # 1. Single Number
@@ -279,3 +280,40 @@ As we are doing these steps one after the other, and we don't know which one is 
 ### Space Complexity `O(1)`
 The first step uses constant extra space to keep track of the counts.
 And also we're doing the string-shift operation in-place by using a mutable string. So, we've taken `O(1)` space-complexity in our solution.
+
+# 15. Product of Array Except Self
+
+> Problem Description: https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3300/
+
+## Solution Approach
+The problem is easy, right? But yeah the note they gave (not to use division) made the problem a tough one! The idea that we're using here to solve the problem is this - "For every given index, `[i]`, we will make use of the product of all the numbers to the left of it and multiply it by the product of all the numbers to the right. This will give us the product of all the numbers except the one at the given index `[i]`"
+
+We'll use two different arrays to get the products of all the numbers from left and another one for getting the products of all the numbers from right. Before populating `left` and `right` we'll fill the boundary start value with 1; for `left` it'll be `0`<sup>th</sup> index and for `right` it'll be `len - 1`<sup>th</sup> index.
+
+```cpp
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int len = nums.size();
+        vector<int> left(len), right(len), result(len);
+
+        left[0] = 1;
+        for(int i = 1; i < len; i++) left[i] = nums[i - 1] * left[i - 1];
+
+        right[len - 1] = 1;
+        for(int i = len - 2; i >= 0; i--) right[i] =  nums[i + 1] * right[i + 1];
+
+        for(int i = 0; i < len; i++) result[i] = left[i] * right[i];
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Where `n` represents the number of elements in the input array. We use one iteration to construct the array `left`, one to construct the array `right` and one last to construct the `result` array using `left` and `right`.
+
+### Space Complexity `O(n)`
+Two intermediate arrays i.e. `right`, `left` that we constructed to keep track of product of elements to the left and right.
