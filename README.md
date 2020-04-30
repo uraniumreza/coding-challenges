@@ -5,10 +5,35 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 1. [Single Number](#1-single-number)
 2. [Happy Number](#2-happy-number)
+3. [Maximum Subarray](#3-maximum-subarray)
+4. [Move Zeroes](#4-move-zeroes)
+5. [Best Time to Buy and Sell Stock II](#5-best-time-to-buy-and-sell-stock-II)
+6. [Group Anagrams](#6-group-anagrams)
+7. [Counting Elements](#7-counting-elements)
+8. [Middle of the Linked List](#8-middle-of-the-linked-list)
+9. [Backspace String Compare](#9-backspace-string-compare)
+10. [Min Stack](#10-min-stack)
+11. [Diameter of Binary Tree](#11-diameter-of-binary-tree)
 12. [Last Stone Weight](#12-last-stone-weight)
 13. [Contiguous Array](#13-contiguous-array)
 14. [Perform String Shifts](#14-perform-string-shifts)
 15. [Product of Array Except Self](#15-product-of-array-except-self)
+16. [Valid Parenthesis String](#16-valid-parenthesis-string)
+17. [Number of Islands](#17-number-of-slands)
+18. [Minimum Path Sum](#18-minimum-path-sum)
+19. [Search in Rotated Sorted Array](#19-search-in-Rrtated-sorted-array)
+20. [Construct Binary Search Tree from Preorder Traversal](#20-construct-binary-search-tree-from-preorder-traversal)
+21. [Leftmost Column with at Least a One](#21-leftmost-column-with-at-least-a-one)
+22. [Subarray Sum Equals K](#22-subarray-sum-equals-k)
+23. [Bitwise AND of Numbers Range](#23-bitwise-and-of-numbers-range)
+24. [LRU Cache](#24-lru-cache)
+25. [Jump Game](#25-jump-game)
+26. [Longest Common Subsequence](#26-longest-common-subsequence)
+27. [Maximal Square](#27-maximal-square)
+28. [First Unique Number](#28-first-unique-number)
+29. [Binary Tree Maximum Path Sum](#29-binary-tree-maximum-path-sum)
+30. [Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](#30-check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree)
+
 
 
 # 1. Single Number
@@ -96,6 +121,344 @@ But finding the overall time-complexity of the `isHappy()` function seems a bit 
 ### Space Complexity `O(*)` [WIP]
 skipping it for now (will update it later)
 
+
+# 3. Maximum Subarray
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3285/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSubArraySum = INT_MIN, contiguousSubArraySum = 0;
+
+        for(int n : nums) {
+            contiguousSubArraySum = max(n, contiguousSubArraySum + n);
+            maxSubArraySum = max(maxSubArraySum, contiguousSubArraySum);
+        }
+
+        return maxSubArraySum;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+
+
+
+
+
+# 4. Move Zeroes
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3286/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int len = nums.size();
+        int i = 0, j = 0;
+
+        while(i < len && j < len) {
+            while(j < len && nums[j] != 0) j++;
+            while(i < len && nums[i] == 0) i++;
+
+            if(i > j && i < len && j < len) swap(nums[i], nums[j]);
+            else i++;
+        }
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 5. Best Time to Buy and Sell Stock II
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3287/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int len = prices.size();
+        if(len == 0) return 0;
+
+        int profit = 0;
+        for(int i = 0; i < len - 1; i++) {
+            if(prices[i] < prices[i + 1]) {
+                profit += prices[i + 1] - prices[i];
+            }
+        }
+
+        return profit;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 6. Group Anagrams
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3288/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        int len = strs.size();
+        vector<string> sortedStrs = strs;
+        for(int i = 0; i < len; i++) {
+            sort(sortedStrs[i].begin(), sortedStrs[i].end());
+        }
+
+        unordered_map<string, vector<string>> M;
+        for(int i = 0; i < len; i++) {
+            M[sortedStrs[i]].push_back(strs[i]);
+        }
+
+        vector<vector<string>> result;
+        for(pair<string, vector<string>> entries : M) {
+            result.push_back(entries.second);
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 7. Counting Elements
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3289/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int countElements(vector<int>& arr) {
+        map<int, int> M;
+
+        for(int num : arr) {
+            if(M.find(num) == M.end()) M[num] = 1;
+            else M[num]++;
+        }
+
+        int count = 0;
+        for(pair<int, int> entries : M) {
+            if(M.find(entries.first + 1) != M.end()) {
+                count += M[entries.first];
+            }
+        }
+
+        return count;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 8. Middle of the Linked List
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3290/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        if(head == NULL) return head;
+
+        ListNode* hare = head;
+        ListNode* tortoise = head;
+        while(tortoise != NULL) {
+            if(tortoise->next == NULL) return hare;
+
+            hare = hare->next;
+            tortoise = tortoise->next->next;
+        }
+
+        return hare;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 9. Backspace String Compare
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3291/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+        stack<char> stackS, stackT;
+
+        for(char s : S) {
+            if(s != '#') stackS.push(s);
+            else if(!stackS.empty()) stackS.pop();
+        }
+
+        for(char s : T) {
+            if(s != '#') stackT.push(s);
+            else if(!stackT.empty()) stackT.pop();
+        }
+
+        if(stackS.size() == stackT.size()) {
+            while(!stackS.empty()) {
+                char a = stackS.top();
+                char b = stackT.top();
+                if(a != b) return false;
+                stackS.pop();
+                stackT.pop();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 10. Min Stack
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3292/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    stack<pair<int, int>> S;
+
+    MinStack() {
+
+    }
+
+    void push(int x) {
+        pair<int, int> temp;
+        if(S.empty()) {
+            temp.first = x;
+            temp.second = x;
+        } else {
+            pair<int, int> top = S.top();
+            int min = top.second > x ? x : top.second;
+            temp.first = x;
+            temp.second = min;
+        }
+
+        S.push(temp);
+    }
+
+    void pop() {
+        S.pop();
+    }
+
+    int top() {
+        pair<int, int> top = S.top();
+        return top.first;
+    }
+
+    int getMin() {
+        pair<int, int> top = S.top();
+        return top.second;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 11. Diameter of Binary Tree
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3293/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        int result = 0;
+        dfs(root, result);
+
+        return result;
+    }
+
+    int dfs(TreeNode* root, int& result) {
+        if(root == NULL) return 0;
+
+        int edgesInLeft = dfs(root->left, result);
+        int edgesInRight = dfs(root->right, result);
+        result = max(result, edgesInLeft + edgesInRight);
+
+        return max(edgesInLeft, edgesInRight) + 1;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
 
 # 12. Last Stone Weight
 
@@ -317,3 +680,722 @@ Where `n` represents the number of elements in the input array. We use one itera
 
 ### Space Complexity `O(n)`
 Two intermediate arrays i.e. `right`, `left` that we constructed to keep track of product of elements to the left and right.
+
+# 16. Valid Parenthesis String
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3301/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int len = s.length();
+
+        if(len == 0 || !s.compare("*")) return true;
+        if(len == 1) return false;
+
+        int left = 0;
+        for(int i = 0; i < len; i++) {
+            if(s[i] == ')') left--;
+            else left++;
+
+            if(left < 0) return false;
+        }
+
+        if(left == 0) return true;
+
+        int right = 0;
+        for(int i = len - 1; i >= 0; i--) {
+            if(s[i] == '(') right--;
+            else right++;
+
+            if(right < 0) return false;
+        }
+
+        return true;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 17. Number of Islands
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3302/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int r = grid.size();
+        if(r == 0) return 0;
+        int c = grid[0].size();
+
+        if(r == 0 && c == 0) return 0;
+
+        int numberOfIslands = 0;
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                if(grid[i][j] == '1') {
+                    numberOfIslands += dfs(grid, i, j);
+                }
+            }
+        }
+
+        return numberOfIslands;
+    }
+
+    int dfs(vector<vector<char>>& grid, int i, int j) {
+        int r = grid.size();
+        int c = grid[0].size();
+
+        if(i < 0 || i >= r || j < 0 || j >= c || grid[i][j] == '0') return 0;
+        grid[i][j] = '0';
+
+        dfs(grid, i, j - 1);
+        dfs(grid, i, j + 1);
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+
+        return 1;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 18. Minimum Path Sum
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3303/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int r = grid.size();
+        int c = grid[0].size();
+
+        vector<vector<int>> distance(r);
+
+        for(int i = 0; i < r; i++) {
+            distance[i] = vector<int>(c);
+            for(int j = 0; j < c; j++) {
+                distance[i][j] = grid[i][j];
+
+                if(i > 0 && j > 0) {
+                    distance[i][j] += min(distance[i][j - 1], distance[i - 1][j]);
+                } else if(i > 0) {
+                    distance[i][j] += distance[i - 1][j];
+                } else if(j > 0) {
+                    distance[i][j] += distance[i][j - 1];
+                }
+            }
+        }
+
+
+        return distance[r-1][c-1];
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+
+# 19. Search in Rotated Sorted Array
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3304/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+
+        int pivot = findPivot(nums, target, 0, len - 1);
+
+        if(pivot == -1) return binarySearch(nums, target, 0, len - 1);
+        if(nums[pivot] == target) return pivot;
+
+        if(nums[0] <= target) return binarySearch(nums, target, 0, pivot - 1);
+        return binarySearch(nums, target, pivot + 1, len - 1);
+    }
+
+    int findPivot(vector<int>& nums, int target, int low, int high) {
+        if(low > high) return -1;
+
+        int mid = low + (high - low) / 2;
+        if(mid < high && nums[mid] > nums[mid + 1]) return mid;
+        if(mid > low && nums[mid - 1] > nums[mid]) return mid - 1;
+
+        if(nums[low] > nums[mid]) return findPivot(nums, target, low, mid - 1);
+        return findPivot(nums, target, mid + 1, high);
+    }
+
+    int binarySearch(vector<int>& nums, int target, int low, int high) {
+        if(low > high) return -1;
+
+        int mid = low + (high - low) / 2;
+        if(nums[mid] == target) return mid;
+
+        if(nums[mid] > target) return binarySearch(nums, target, low, mid - 1);
+        return binarySearch(nums, target, mid + 1, high);
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 20. Construct Binary Search Tree from Preorder Traversal
+
+> Problem Description:
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int currentIndex = 0;
+
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        return helper(preorder, INT_MAX, INT_MIN);
+    }
+
+    TreeNode* helper(vector<int>& preorder, int upper, int lower) {
+        if(currentIndex == preorder.size()) return NULL;
+
+        int currentValue = preorder[currentIndex];
+        if(currentValue > upper || currentValue < lower) return NULL;
+        currentIndex++;
+
+        TreeNode* root = new TreeNode(currentValue);
+        root->left = helper(preorder, currentValue, lower);
+        root->right = helper(preorder, upper, currentValue);
+
+        return root;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 21. Leftmost Column with at Least a One
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3306/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
+        vector<int> d = binaryMatrix.dimensions();
+        int n = d[0];
+        int m = d[1];
+
+        vector<int> indexes;
+        for(int i = 0; i < n; i++) {
+            int index = binarySearch(binaryMatrix, i, 0, m - 1);
+            if(index != -1) indexes.push_back(index);
+        }
+
+        sort(indexes.begin(), indexes.end());
+        return indexes.empty() ? -1 : indexes[0];
+    }
+
+    int binarySearch(BinaryMatrix &binaryMatrix, int x, int low, int high) {
+        if(low > high) return -1;
+
+        int y = low + (high - low) / 2;
+        int val = binaryMatrix.get(x, y);
+
+        if(val == 1 && (y == 0 || binaryMatrix.get(x, y-1) == 0)) return y;
+        else if(val == 1) return binarySearch(binaryMatrix, x, low, y - 1);
+        return binarySearch(binaryMatrix, x, y + 1, high);
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 22. Subarray Sum Equals K
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3307/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> S;
+        int len = nums.size();
+        int result = 0;
+        int sum = 0;
+
+        for (int i = 0; i < len; i++) {
+            sum += nums[i];
+            if (sum == k) result++;
+            if (S.find(sum - k) != S.end()) result += S[sum - k];
+
+            S[sum]++;
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 23. Bitwise AND of Numbers Range
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3308/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int rangeBitwiseAnd(int m, int n) {
+        int shiftCount = 0;
+
+        while(m != n) {
+            m >>= 1; n >>= 1;
+            shiftCount++;
+        }
+
+        return m << shiftCount;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 24. LRU Cache
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3309/
+
+## Solution Approach
+
+
+```cpp
+class DLL {
+public:
+    int key;
+    int value;
+    DLL* prev;
+    DLL* next;
+
+    DLL(int _key, int _value) {
+        key = _key;
+        value = _value;
+        prev = NULL;
+        next = NULL;
+    }
+};
+
+class LRUCache {
+private:
+    unordered_map<int, DLL*> M;
+    int capacity;
+    int totalEntries = 0;
+    DLL* head = new DLL(0, 0);
+    DLL* tail = new DLL(0, 0);
+
+public:
+    LRUCache(int _capacity) {
+        capacity = _capacity;
+        head->next = tail;
+        tail->prev = head;
+    }
+
+    DLL* addInHead(int key, int value) {
+        DLL* temp = new DLL(key, value);
+        temp->next = head->next;
+        head->next->prev = temp;
+        temp->prev = head;
+        head->next = temp;
+
+        return temp;
+    }
+
+    void removeItem(DLL* item) {
+        item->prev->next = item->next;
+        item->next->prev = item->prev;
+
+        delete item;
+    }
+
+    void removeFromTail() {
+        DLL* temp = tail->prev;
+        tail->prev = temp->prev;
+        temp->prev->next = tail;
+
+        delete temp;
+    }
+
+    int get(int key) {
+        if(M.find(key) != M.end()) {
+            int value = M[key]->value;
+            DLL* temp = addInHead(key, value);
+            removeItem(M[key]);
+            M[key] = temp;
+            return value;
+        }
+
+        return -1;
+    }
+
+    void put(int key, int value) {
+        if(M.find(key) != M.end()) {
+            DLL* temp = addInHead(key, value);
+            removeItem(M[key]);
+            M[key] = temp;
+        } else {
+            DLL* temp = addInHead(key, value);
+            M[key] = temp;
+            totalEntries++;
+        }
+
+        if(totalEntries > capacity) {
+            DLL* temp = tail->prev;
+            M.erase(temp->key);
+            removeFromTail();
+            totalEntries--;
+        }
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 25. Jump Game
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3310/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int len = nums.size();
+        int lastSuccessfulIndex = len - 1;
+
+        for(int i = len - 2; i >= 0; i--) {
+            if(i + nums[i] >= lastSuccessfulIndex) {
+                lastSuccessfulIndex = i;
+            }
+        }
+
+        return lastSuccessfulIndex == 0;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 26. Longest Common Subsequence
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3311/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int r = text1.length();
+        int c = text2.length();
+
+        vector<vector<int>> dp(r + 1);
+        for(int i = 0; i <= r; i++) {
+            vector<int> col(c + 1);
+            dp[i] = vector<int>(col);
+        }
+
+        for(int i = 0; i <= r; i++) {
+            for(int j = 0; j <= c; j++) {
+                if(i == 0 || j == 0) dp[i][j] = 0;
+            }
+        }
+
+        int result = 0;
+        for(int i = 1; i <= r; i++) {
+            for(int j = 1; j <= c; j++) {
+                if(text1[i - 1] == text2[j - 1]) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+
+        return dp[r][c];
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 27. Maximal Square
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3312/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int result = 0;
+        int r = matrix.size();
+        if(r == 0) return result;
+
+        int c = matrix[0].size();
+        vector<vector<int>> dp(r + 1);
+        for(int i = 0; i <= r; i++) {
+            dp[i] = vector<int>(c + 1);
+        }
+
+        for(int i = 0; i <= r; i++) {
+            for(int j = 0; j <= c; j++) {
+                if(i == 0 || j == 0) dp[i][j] = 0;
+            }
+        }
+
+        for(int i = 1; i <= r; i++) {
+            for(int j = 1; j <= c; j++) {
+                if(matrix[i - 1][j - 1] == '0') dp[i][j] = 0;
+                else dp[i][j] = 1 + min(dp[i - 1][j - 1], min(dp[i][j - 1], dp[i - 1][j]));
+
+                result = max(result, dp[i][j]);
+            }
+        }
+
+        return result * result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 28. First Unique Number
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3313/
+
+## Solution Approach
+
+
+```cpp
+class DLL {
+public:
+    int value;
+    DLL* prev;
+    DLL* next;
+
+    DLL(int _value) {
+        value = _value;
+        prev = NULL;
+        next = NULL;
+    }
+};
+
+class FirstUnique {
+public:
+    unordered_map<int, DLL*> M;
+    DLL* head = new DLL(0);
+    DLL* tail = new DLL(0);
+
+    FirstUnique(vector<int>& nums) {
+        int len = nums.size();
+        head->next = tail;
+        tail->prev = head;
+
+        for(int i = 0; i < len; i++) add(nums[i]);
+    }
+
+    void removeItem(DLL* item) {
+        item->prev->next = item->next;
+        item->next->prev = item->prev;
+
+        delete item;
+    }
+
+    DLL* addInTail(int value) {
+        DLL* temp = new DLL(value);
+        temp->next = tail;
+        temp->prev = tail->prev;
+        tail->prev->next = temp;
+        tail->prev = temp;
+
+        return temp;
+    }
+
+    int showFirstUnique() {
+        return head->next == tail ? -1 : head->next->value;
+    }
+
+    void add(int value) {
+        if(M.find(value) == M.end()) {
+            DLL* temp = addInTail(value);
+            M[value] = temp;
+        } else if(M[value] != NULL) {
+            removeItem(M[value]);
+            M[value] = NULL;
+        }
+    }
+};
+
+/**
+ * Your FirstUnique object will be instantiated and called as such:
+ * FirstUnique* obj = new FirstUnique(nums);
+ * int param_1 = obj->showFirstUnique();
+ * obj->add(value);
+ */s
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 29. Binary Tree Maximum Path Sum
+
+> Problem Description:
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    int result = INT_MIN;
+    int maxPathSum(TreeNode* root) {
+        helper(root);
+        return result;
+    }
+
+    int helper(TreeNode* root) {
+        if(root == NULL) return 0;
+
+        int left = max(0, helper(root->left));
+        int right = max(0, helper(root->right));
+        result = max(result, left + right + root->val);
+        return max(left, right) + root->val;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
+
+# 30. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
+
+> Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/532/week-5/3315/
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    bool isValidSequence(TreeNode* root, vector<int>& arr) {
+        return helper(root, arr, 0);
+    }
+
+    bool helper(TreeNode* node, vector<int>& arr, int currentIndex) {
+        if(node == NULL || currentIndex == arr.size()) return false;
+
+        if(node->val == arr[currentIndex]) {
+            if(currentIndex == arr.size() - 1 && node->left == NULL && node->right == NULL) {
+                return true;
+            }
+
+            int left = helper(node->left, arr, currentIndex + 1);
+            int right = helper(node->right, arr, currentIndex + 1);
+
+            return (left || right);
+        } else {
+            return false;
+        }
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
