@@ -2,7 +2,7 @@
 With many of us around the world being encouraged to stay indoors and work from home, [LeetCode](https://leetcode.com) thought this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, `LeetCode` is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020. This is basically my journal where I'm dumping the solutions each day and how I'm thinking about the problems and the process of the solution. Also trying to add complexity(time, space) analysis of the the solutions that I have attached.
 
 # Problems by Days
-
+> April 2020
 1. [Single Number](#1-single-number)
 2. [Happy Number](#2-happy-number)
 3. [Maximum Subarray](#3-maximum-subarray)
@@ -34,7 +34,8 @@ With many of us around the world being encouraged to stay indoors and work from 
 29. [Binary Tree Maximum Path Sum](#29-binary-tree-maximum-path-sum)
 30. [Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](#30-check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree)
 
-
+> May 2020
+1. [First Bad Version](#1-first-bad-version)
 
 # 1. Single Number
 
@@ -1399,3 +1400,39 @@ public:
 ### Time Complexity `O()`
 
 ### Space Complexity `O()`
+
+# 1. First Bad Version
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316/
+
+## Solution Approach
+This is a straight forward binary search problem. If we get that `mid` element is bad-version then we'll check if the previous version was good, then this is the first occurence of bad-version i.e. our result. Otherwise we'll do recursive binary-search from `low` to `mid - 1` because first occurance of the bad-version will be in the left-side. Finally, If the mid element is not bad then we know that the bad-version element will be in the right-side, so we'll do binary-search from `mid + 1` to `high`.
+
+```cpp
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        return binarySearch(1, n);
+    }
+
+    int binarySearch(int low, int high) {
+        if(low > high) return -1;
+        int mid = low + (high - low) / 2;
+
+        if(isBadVersion(mid)) {
+            if(!isBadVersion(mid - 1)) return mid;
+            else return binarySearch(low, mid - 1);
+        } else {
+            return binarySearch(mid + 1, high);
+        }
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(logn)`
+The `binarySearch` will run `log(n)` times in the worst case
+
+### Space Complexity `O(logn)`
+As we are using a recursive solution, the call-stack will use `log(n)` space
