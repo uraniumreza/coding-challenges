@@ -36,6 +36,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 
 > May 2020
 1. [First Bad Version](#1-first-bad-version)
+2. [Jewels and Stones](#2-jewels-and-stones)
 
 # 1. Single Number
 
@@ -1436,3 +1437,34 @@ The `binarySearch` will run `log(n)` times in the worst case
 
 ### Space Complexity `O(logn)`
 As we are using a recursive solution, the call-stack will use `log(n)` space
+
+
+# 2. Jewels and Stones
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
+
+## Solution Approach
+This is a very basic search problem. We have to search if characters from one string is present in another! So, brute-force approach would cost `O(m * n)`. So, we can use an `unordered_map` or `unordered_set` to store the jewels upfront and later we can find from that container in constant time.
+
+```cpp
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        unordered_set<char> jewels;
+        for(char c : J) jewels.insert(c);
+
+        int count = 0;
+        for(char c : S) if(jewels.find(c) != jewels.end()) count++;
+
+        return count;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(max(m, n))`
+Here, `m` is the length of the string `J` and `n` is the length of the string `S`. We are traversing through the both string; and finding in `set` is constant time! So, the maximum of `(m, n)` will be our worst case time-complexity.
+
+### Space Complexity `O(m)`
+We are using an extra data-structure i.e. `set` to store the `jewels`, so that we can find in `constant` time!
