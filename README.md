@@ -1,5 +1,5 @@
 # leetcode-30days-challenge
-With many of us around the world being encouraged to stay indoors and work from home, [LeetCode](https://leetcode.com) thought this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, `LeetCode` is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020. This is basically my journal where I'm dumping the solutions each day and how I'm thinking about the problems and the process of the solution. Also trying to add complexity(time, space) analysis of the the solutions that I have attached.
+With many of us around the world being encouraged to stay indoors and work from home, [LeetCode](https://leetcode.com) thought this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, `LeetCode` is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020. Later in the month of may they introduced the [May LeetCoding Challenge](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/). This is basically my journal where I'm dumping the solutions each day and how I'm thinking about the problems and the thought process of the solution. Also trying to add complexity(time, space) analysis of the the solutions that I have attached.
 
 # Problems by Days
 > April 2020
@@ -37,6 +37,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 > May 2020
 1. [First Bad Version](#1-first-bad-version)
 2. [Jewels and Stones](#2-jewels-and-stones)
+3. [Ransom Note](#3-ransom-note)
 
 # 1. Single Number
 
@@ -1468,3 +1469,43 @@ Here, `m` is the length of the string `J` and `n` is the length of the string `S
 
 ### Space Complexity `O(m)`
 We are using an extra data-structure i.e. `set` to store the `jewels`, so that we can find in `constant` time!
+
+# 3. Ransom Note
+
+> Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318/
+
+## Solution Approach
+If we can count the characters of `magazine` and later check that the required characters for generating the `ransomNote` is there in the `magazine`, will give us the result. To store the counts, we'll use an `unordered_map`, which will allow us to search/retrieve characters and count in constant time! If we don't find any character from `ransomNote` in the hash-map, we'll return `false`, otherwise we'll kepp decrementing the count of each characters that we've encountered. In the meantime if we get any character that presents in the hash-map but has no count i.e. 0 we'll also return false in that case, because we don't have the required characters in the `magazine` to form our `ransomNote`.
+
+
+```cpp
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        unordered_map<char, int> M;
+
+        for(char ch : magazine) {
+            if(M.find(ch) == M.end()) M[ch] = 1;
+            else M[ch]++;
+        }
+
+        for(char ch : ransomNote) {
+            if(M.find(ch) == M.end() || M[ch] == 0){
+                return false;
+            } else {
+                M[ch]--;
+            }
+        }
+
+        return true;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(max(m, n))`
+Here, `m`, `n` is the respective size of `ransomNote` and `magazine`. We're looping around (traversing) two strings, so the time complexity would be `O(max(m, n))`
+
+### Space Complexity `O(n)`
+Additional unordered_map of `n` size to map the magazine characters with their number of occurences in the magazine
