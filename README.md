@@ -38,6 +38,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 1. [First Bad Version](#1-first-bad-version)
 2. [Jewels and Stones](#2-jewels-and-stones)
 3. [Ransom Note](#3-ransom-note)
+4. [Number Complement](#4-number-complement)
 
 # 1. Single Number
 
@@ -1509,3 +1510,83 @@ Here, `m`, `n` is the respective size of `ransomNote` and `magazine`. We're loop
 
 ### Space Complexity `O(n)`
 Additional unordered_map of `n` size to map the magazine characters with their number of occurences in the magazine
+
+# 4. Number Complement
+
+> Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3319/
+
+## Solution Approach
+First of all I tried to solve this in a very naive approach which is -
+
+- Convert the decimal number into a binary number (string)
+- Complement each character of that binary string
+- Finally convert that binary string to a decimal number
+
+I was doing this process just to brush up my binary-decimal conversion logics!! xD Here is the code -
+
+
+```cpp
+class Solution {
+public:
+    string decimalToBinary(int num) {
+        string binary = "";
+        while(num) {
+            int a = num % 2;
+            binary = to_string(a) + binary;
+            num /= 2;
+        }
+
+        return binary;
+    }
+
+    int binaryToDecimal(string binary) {
+        int len = binary.length();
+        int decimal = 0;
+
+        for(int i = 0; i < len; i++) {
+            decimal += (binary[i] - '0') * pow(2, len - i -1);
+        }
+
+        return decimal;
+    }
+
+    string getComplement(string binary) {
+        string result = "";
+
+        for(char ch : binary) {
+            result += ch == '1' ? '0' : '1';
+        }
+
+        return result;
+    }
+
+    int findComplement(int num) {
+        string binary = decimalToBinary(num);
+        string binaryComplement = getComplement(binary);
+        int decimalComplement = binaryToDecimal(binaryComplement);
+
+        return decimalComplement;
+    }
+};
+```
+
+But, let's do it in a more standard way. The problem itself says that it's a binary arithmetic problem! We need to flip each bit of the binary number and to do that we will use the property of `XOR`. We know that if we `XOR` any bit with 1, that bit will be flipped (complemented). So, we can use a mask bit i.e. 1 and do `XOR` with the original number. Let's say 5 is our given number; the binary of 5 is `101`. So, when we'll do `XOR` 5 with 1; we will get 4 i.e. `100` because only the LSB has been flipped. Now the question is, how to flip other bits, we can modify our `mask` to do that. After each `XOR` operation we'll `LeftShift` our mask by 1, which shift the mask-bit to the left and eventually we'll finish doing `XOR` on each bit of the number and get the result! So, second question comes to our mind is - how to know the number of `LeftShift` operations we have to do on the `mask`? We'll do left shift until the length of the original number, thus all the bits will be flipped; makes sense right? To simplify this process more, we can generate our `mask` in a single operation (not looping through the length of the number and doing left-shift each time). So, our desired mask will be a binary number whose length is the same as the given number but all the bits will be 1 (for achieving that flip on each bit). Suppose, our given number is 5; if we take 1 and then left shift that number by 3 (because the length of binary 5 -> 101 is 3) we'll get `1000` and then negating that number by 1 will give us `111`. Finally doing `XOR` between `mask` and the given number will give us the result.
+
+_N.B. One point we missed above; when we're doing left-shift operation on 1 by the length of the number, then we'll have an overflow of 32 bit, right? So to tackle that we can typecast the number by (long) and eventually after subtracting by 1 we'll get an integer (32 bit)_
+
+```cpp
+class Solution {
+public:
+    int findComplement(int num) {
+        int len = (int) log2(num);
+        int mask = (long) (1 << len + 1) - 1;
+
+        return num ^ mask;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(1)`
+### Space Complexity `O(1)`
