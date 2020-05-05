@@ -201,7 +201,7 @@ Constant space
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3287/
 
 ## Solution Approach
-
+This problem is tricky; just becuase of this - _You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times)._ So, if you miss this, you'll dive into a more bizarre state of the solution! The description says we can buy and sell a share many times; so, as many transactions as we can make, eventually we'll maximize our profit. So, to do that, we'll buy one share at day `i` and sell that at day `i + 1`, and also buy the same stock again at day `i + 1` and sell at day `i + 2`, going until the end of the days/prices. But we just need to check if we can make profit out of that buy and sell by making sure that `ith` day price is lower than the `(i + 1)th` day price.
 
 ```cpp
 class Solution {
@@ -224,9 +224,11 @@ public:
 
 ## Complexity Analysis
 
-### Time Complexity `O()`
+### Time Complexity `O(n)`
+Linear time
 
-### Space Complexity `O()`
+### Space Complexity `O(1)`
+Constant space
 
 # 6. Group Anagrams
 
