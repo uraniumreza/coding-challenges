@@ -132,7 +132,7 @@ skipping it for now (will update it later)
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3285/
 
 ## Solution Approach
-
+The solution of this problem is very intutive! We'll solve it in a greedy approach. We'll take two variables upfront, i) `contiguousSubArraySum` and ii) `maxSubArraySum`. We'll iterate through the array and in each iteration we'll check if adding that value to our previous subArray increases the chance of getting the maximum `contiguousSubArraySum` rather taking the value itself by starting to form a new sub-array makes our `contiguousSubArraySum` higher than previous. By this process we're actually forming candidate sub-arrays and their sum. Also, in each iteration we'll check if the `maxSubArraySum` value can be updated i.e. getting the mximumSum from those subArray candidates.
 
 ```cpp
 class Solution {
@@ -152,13 +152,11 @@ public:
 
 ## Complexity Analysis
 
-### Time Complexity `O()`
+### Time Complexity `O(n)`
+Linear time solution. We are iterating through the array of numbers once, which has `n` number of elements
 
-### Space Complexity `O()`
-
-
-
-
+### Space Complexity `O(1)`
+We are just taking two variables for storing sums, which give us a constant space solution
 
 
 # 4. Move Zeroes
