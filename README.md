@@ -164,21 +164,25 @@ We are just taking two variables for storing sums, which give us a constant spac
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3286/
 
 ## Solution Approach
+Bruteforce solution approach is pretty easy; just traverse through the given array an for all non-zero elements we'll push that element into a new array. Finally fill the new array's available indexes with zeroes. But, this solution has `O(n)` space complexity, as we are creating a new array of size `n`.
 
+Now, we'll try to solve this problem in-place i.e. without using an additional array. We'll have an `index` variable starting from `0` and traversing through the array, whenever we will encounter a non-zero element, we'll put that element in that `index` and increment the `index`. Finally we'll fill the rest of the array from `index` to the last index with zeroes. As you can see, here we are doing array write operation `n` times for any case. Let's go through the code -
 
 ```cpp
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
         int len = nums.size();
-        int i = 0, j = 0;
+        int index = 0;
 
-        while(i < len && j < len) {
-            while(j < len && nums[j] != 0) j++;
-            while(i < len && nums[i] == 0) i++;
+        for(int i = 0; i < len; i++) {
+            if(nums[i] != 0) {
+                nums[index++] = nums[i];
+            }
+        }
 
-            if(i > j && i < len && j < len) swap(nums[i], nums[j]);
-            else i++;
+        for(int i = index; i < len; i++) {
+            nums[i] = 0;
         }
     }
 };
@@ -186,9 +190,11 @@ public:
 
 ## Complexity Analysis
 
-### Time Complexity `O()`
+### Time Complexity `O(n)`
+Linear time solution, the length of the given array is `n`
 
-### Space Complexity `O()`
+### Space Complexity `O(1)`
+Constant space
 
 # 5. Best Time to Buy and Sell Stock II
 
