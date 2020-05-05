@@ -1,5 +1,5 @@
-# leetcode-30days-challenge
-With many of us around the world being encouraged to stay indoors and work from home, [LeetCode](https://leetcode.com) thought this is the perfect opportunity for us to focus on studying up for future coding interviews. To help us stay focused, `LeetCode` is running the [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020. Later in the month of may they introduced the [May LeetCoding Challenge](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/). This is basically my journal where I'm dumping the solutions each day and how I'm thinking about the problems and the thought process of the solution. Also trying to add complexity(time, space) analysis of the the solutions that I have attached.
+# Coding Challenges
+I started this repository as a journal of my [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020! Later in the month of May, [LeetCode](https://leetcode.com) arranged another [May LeetCoding Challenge](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/). Finally this has become my core journal where I put the solution approach and the thought process behind each coding problem that I do. Also I have added complexity(time, space) analysis of the the solutions.
 
 # Problems by Days
 > April 2020
