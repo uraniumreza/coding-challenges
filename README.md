@@ -39,6 +39,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 2. [Jewels and Stones](#2-jewels-and-stones)
 3. [Ransom Note](#3-ransom-note)
 4. [Number Complement](#4-number-complement)
+5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
 
 # 1. Single Number
 
@@ -1590,3 +1591,49 @@ public:
 
 ### Time Complexity `O(1)`
 ### Space Complexity `O(1)`
+
+
+# 5. First Unique Character in a String
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3320/
+
+## Solution Approach
+This problem has basically two parts;
+
+1) Find the unique characters of the string and
+2) Find the first index from those unique characters
+
+For finding the first answer, we'll use a hash-map and store the count of each character of the string, and by this way we'll get the unique characters. But, to answer the second question we'll do a modification in our first approach; we won't store count against each character in the hash-map, we'll store their index. While traversing through the string and storing indexes in the hash-map, if we encounter a character which already exists in the hash-map we'll simply put `-1` against that character. Now, you can relate the whole thing together. Traversing through the hash-map entries and finding the minimum index will be our final step. If we can't find any unique character, i.e. either hash-map has no entries or all of them has a value `-1`, we'll return `-1`!
+
+```cpp
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        int len = s.length();
+        unordered_map<char, int> M;
+
+        for(int i = 0; i < len; i++) {
+            if(M.find(s[i]) == M.end()) {
+                M[s[i]] = i;
+            } else {
+                M[s[i]] = -1;
+            }
+        }
+
+        int firstChar = INT_MAX;
+        for(auto entry : M) {
+            if(entry.second != -1) firstChar = min(firstChar, entry.second);
+        }
+
+        return firstChar == INT_MAX ? -1 : firstChar;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time solution; traversing through the string of length `n` and then traversing through the hash-map which will have maximum of `n` entries.
+
+### Space Complexity `O(n)`
+We're using a hash-map of size `n` to store the indexes against each character.
