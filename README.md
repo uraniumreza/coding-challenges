@@ -1674,10 +1674,44 @@ public:
 };
 ```
 
+But this solution approach has linear time complexity and linear space complexity! Is there any way that we can do it in constant space? I thought of an approach but that would increase the time complexity though. As we are sure that there will be definitely one major element in the array, then we can sort the array and return the middle element of the array as a major-element. Because if there's a major element, mid index will have the value which is the majority.
+
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        return nums[ceil(nums.size() / 2)];
+    }
+};
+```
+
+As you can see, this solution approach has `O(nlogn)` time-complexity because we are doing sorting here! Another optimal solution can be of constant-space and liner-time. To have the idea of the solution approach, let's think about the array of numbers into two sub-group; i) Consists of all the majority elements and ii) Has the non-majority numbers/elements. And obviously the length of the first sub-group will be always maximum because of the obvious case of having a majority element! Let's say the majority elements occured `m` times out of total `n` numbers in the array. By the definition of majority element, we can write `m/n` > `1/2`. At most one of the two distinct numbers that are discarded can be the majority element. So, if we discard the two elements from the array, the ratio of the number of remaining majority elements to the total number of elements will be either i) Two of them are non-majority numbers `(m/n-2)` and ii) One of them are the majority elements `(m - 1/ n - 2)`. It is easy to verify that if `m/n` > `1/2` then `m/n-2` > `1/2` and `m-1/n-2` > `1/2`. So, by discarding items from the array, the difference in the size of the two subgroups are really changed! So, if we can finish this discursion process and finally we'll get our majority element left! The algorithm is as folows- we'll have a major-element candidate, we'll track it's count too. We'll start iterating over the array and if we get the same number as the candidate-majority-element we will incresase the count, otherwise decrese. If at any stage of the iteration, count becomes zero then we'll assign the current-indexed-value as a candidate. After finishing the array traversal we will get our majority-element!
+
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int majorityElement, count = 0;
+
+        for(int i = 0; i < n; i++) {
+            if(count == 0) majorityElement = nums[i];
+
+            if(majorityElement != nums[i]) count--;
+            else count++;
+        }
+
+        return majorityElement;
+    }
+};
+```
+
 ## Complexity Analysis
 
 ### Time Complexity `O(n)`
 Linear time
 
-### Space Complexity `O(n)`
-Linear space
+### Space Complexity `O(1)`
+Constant space
