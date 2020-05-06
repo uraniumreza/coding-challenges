@@ -40,6 +40,7 @@ With many of us around the world being encouraged to stay indoors and work from 
 3. [Ransom Note](#3-ransom-note)
 4. [Number Complement](#4-number-complement)
 5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
+6. [Majority Element](#6-majority-element)
 
 # 1. Single Number
 
@@ -1643,3 +1644,40 @@ Linear time solution; traversing through the string of length `n` and then trave
 
 ### Space Complexity `O(n)`
 We're using a hash-map of size `n` to store the indexes against each character.
+
+
+# 6. Majority Element
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
+
+## Solution Approach
+Another counting problem! Very basic, we're using a hash-map to store the count of occurances against each number from the given array. And after traversing through the given array and putting all the counts in the hash-map, we can then traverse through the hash-map and check what's the majority-element we got here!
+
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int, int> M;
+        int n = nums.size(), result;
+
+        for(int i = 0; i < n; i++) M[nums[i]]++;
+
+        for(auto entry : M) {
+            if(entry.second > n/2) {
+                result = entry.first;
+                break;
+            }
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time
+
+### Space Complexity `O(n)`
+Linear space
