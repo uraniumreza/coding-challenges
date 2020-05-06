@@ -1,8 +1,8 @@
 # Coding Challenges
 I started this repository as a journal of my [30-Day LeetCoding Challenge](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/) for April 2020! Later in the month of May, [LeetCode](https://leetcode.com) arranged another [May LeetCoding Challenge](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/). Finally this has become my core journal where I put the solution approach and the thought process behind each coding problem that I do. Also I have added complexity(time, space) analysis of the the solutions.
 
-# Problems by Days
-> April 2020
+# Problems by Collection
+> [April 2020](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/)
 1. [Single Number](#1-single-number)
 2. [Happy Number](#2-happy-number)
 3. [Maximum Subarray](#3-maximum-subarray)
@@ -33,14 +33,22 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 28. [First Unique Number](#28-first-unique-number)
 29. [Binary Tree Maximum Path Sum](#29-binary-tree-maximum-path-sum)
 30. [Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](#30-check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree)
-
-> May 2020
+---
+> [May 2020](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/)
 1. [First Bad Version](#1-first-bad-version)
 2. [Jewels and Stones](#2-jewels-and-stones)
 3. [Ransom Note](#3-ransom-note)
 4. [Number Complement](#4-number-complement)
 5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
 6. [Majority Element](#6-majority-element)
+---
+> [blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
+
+1. [Two Sum](#1-two-sum)
+2. [Best Time to Buy and Sell Stock](#2-best-time-to-buy-and-sell-stock)
+3. [Contains Duplicate](#3-contains-duplicate)
+
+---
 
 # 1. Single Number
 
@@ -1412,6 +1420,8 @@ public:
 
 ### Space Complexity `O()`
 
+---
+
 # 1. First Bad Version
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316/
@@ -1715,3 +1725,114 @@ Linear time
 
 ### Space Complexity `O(1)`
 Constant space
+
+---
+
+# 1. Two Sum
+
+> LeetCode: https://leetcode.com/problems/two-sum/
+
+> 📘 EPI: Page 40
+
+## Solution Approach
+Given an array of integers and a target value. We need to find out two numbers from the array which will sum the target value. To do this in brute-force approach we can easily check all possible cases to find two numbers which will get us the target sum. But this approach will cost `O(n^2)` time. We can minimize this time complexity by using a hash-table. We'll iterate through the array and for each number we'll store the subtracted value from the target and the index to the hash-table. And in each iteration we'll check if the current number exists in the hash-table. If we get the value in hash-table that means we've found the two values that will give us the target sum!
+
+Suppose, given -
+
+```
+nums = [2, 3, 5, 7]
+target = 9
+```
+
+Let's have our **HashMap** `M` and visualize what we're doing in each iteration -
+
+```
+i = 0:
+check nums[i] = 2 exists in M
+[NO] Insert 9 - 2 = (7 -> 0) in M
+     M = { 7: 0 }
+
+i = 1
+check nums[i] = 3 exists in M
+[NO] Insert 9 - 3 = (6 -> 1) in M
+     M = { 7: 0, 6: 1 }
+
+i = 2
+check nums[i] = 5 exists in M
+[NO] Insert 9 - 5 = (4 -> 2) in M
+     M = { 7: 0, 6: 1, 4: 2 }
+
+i = 3
+check nums[i] = 7 exists in M
+[YES] return { i, M[7]] }
+```
+That's basically the illustration of our thought process, let's now try to code -
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int size = nums.size();
+        unordered_map<int, int> M;
+
+        for(int i=0; i<size; i++) {
+            int diff = target - nums[i];
+            if(M.find(nums[i]) != M.end()) {
+                return { M[nums[i]], i };
+            }
+
+            M[diff] = i;
+        }
+
+        return {};
+    }
+};
+```
+
+This solution has linear time-complexity and linear space-complexity i.e. `O(n)`. Can we achieve this in constant space by not using any additional data-structure? We can do that if the given array is sorted, then we can use an invariant to solve that in constant space! Having two pointers e.g. `i` and `j`, pointing to the `0`th index and the `n-1`th index of the array! In each iteration we'll check if we can get `A[i] + A[j] == target`, because that's the result we want! But, what will happen when there will be inequality or what will be the policy to move the indexes? Here, we are using the invariants. If we get `A[i] + A[j] < target`, we know that we cannot get the target by moving `i` forward, because it'll give us another larger value then the current `A[i]` as the array is sorted; so, we'll move `j` by decrementing the value, by this way we'll have a chance of minimizing the `A[i] + A[j]` and take closer to the `target` value. Otherwise, when `A[i] + A[j] > target`, if we understand the previous invariant then we can easily go with this, which is moving `i` forward because our sum i.e. `A[i] + A[j]` is lower than the target, if we move the `i`the index forward we'll get a highe value. Let's go through a illustration of our solution approach -
+
+```
+A = [2, 5, 7, 9, 13]
+target = 14
+
+i = 0, j = 4
+A[i] + A[j] ::= 2 + 13 ::= 15 > target ::= 15 > 14
+Decrement j ::= 3
+
+i = 0, j = 3
+A[i] + A[j] ::= 2 + 9 ::= 11 < target ::= 11 < 14
+Increment i ::= 1
+
+i = 1, j = 3
+A[i] + A[j] ::= 5 + 9 ::= 14 = target ::= 14 = 14
+Done, return { i, j } ::= { 1, 3 }
+```
+Here's the code of this solution -
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for(int i = 0, j = nums.size() - 1; i < j; ) {
+            if(nums[i] + nums[j] == target) {
+                return { i, j };
+            } else if(nums[i] + nums[j] > target) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+
+        return {};
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time; as we need to iterate the whole array in the worst case
+
+### Space Complexity `O(1)`
+Constant space; no additional data-structure applied
+
