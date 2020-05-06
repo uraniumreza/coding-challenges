@@ -1836,3 +1836,72 @@ Linear time; as we need to iterate the whole array in the worst case
 ### Space Complexity `O(1)`
 Constant space; no additional data-structure applied
 
+
+# 2. Best Time to Buy and Sell Stock
+
+> LeetCode: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+> 📘 EPI: 6.6, Page 1
+
+## Solution Approach
+We can solve that by iterating over the given array of prices once! We have to keep track of the minimum-price we have seen so far and In each day we'll check if we can maximize our profit by calculating the difference between minimum price we have seen so far and the price of the current day. Let's see an example -
+
+```
+A = [7, 1, 5, 3, 6]
+maxProfit = 0, minPrice = MAX
+
+In each iteration we'll do these
+    minPrice = min(A[i], minPrice)
+    maxProfit = max(maxProfit, A[i] - minPrice)
+
+i = 0
+minPrice = min(7, MAX) ::= 7
+maxProfit = max(0, 7 - 7) ::= 0
+
+i = 1
+minPrice = min(1, 7) ::= 1
+maxProfit = max(0, 1 - 1) ::= 0
+
+i = 2
+minPrice = min(5, 1) ::= 1
+maxProfit = max(0, 5 - 1) ::= 4
+
+i = 3
+minPrice = min(3, 1) ::= 1
+maxProfit = max(4, 3 - 1) ::= 4
+
+i = 4
+minPrice = min(6, 1) ::= 1
+maxProfit = max(4, 6 - 1) ::= 5
+
+return maxProfit ::= 5
+
+```
+Here's the code -
+
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxProfit = 0;
+        int minPrice = INT_MAX;
+
+        int size = prices.size();
+        for(int i=0; i<size; i++) {
+            int diff = prices[i] - minPrice;
+            minPrice = min(minPrice, prices[i]);
+            maxProfit = max(maxProfit, diff);
+        }
+
+        return maxProfit;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time solution; only traversing the array
+
+### Space Complexity `O(1)`
+Constant space
