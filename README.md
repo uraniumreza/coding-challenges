@@ -1730,7 +1730,7 @@ Constant space
 
 # 1. Two Sum
 
-> LeetCode: https://leetcode.com/problems/two-sum/
+> Problem Description: https://leetcode.com/problems/two-sum/
 
 > 📘 EPI: Page 40
 
@@ -1839,7 +1839,7 @@ Constant space; no additional data-structure applied
 
 # 2. Best Time to Buy and Sell Stock
 
-> LeetCode: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+> Problem Description: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
 > 📘 EPI: 6.6, Page 1
 
@@ -1905,3 +1905,73 @@ Linear time solution; only traversing the array
 
 ### Space Complexity `O(1)`
 Constant space
+
+# 3. Contains Duplicate
+
+> Problem Description: https://leetcode.com/problems/contains-duplicate/
+
+## Solution Approach
+Brute-force approach of checking each pair of the array, if they are same or not will give us the solution, but not an optimal solution of `O(n^2)` time-complexity! Let's try to minimize the time-complexity. If we sort the given array and then traverse through the array checking if `A[i]` and `A[i + 1]` is equal or not, this will give us the solution. Sorting will take `O(nlogn)` and traversing the array takes `O(n)` which suffices that the solution has time-complexity of `O(nlogn)`. This solution approach is pretty straight forward and we can easily visualize what's happening, let's dive into the code -
+
+```cpp
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+
+        for(int i = 1; i < n; i++) {
+            if(nums[i] == nums[i - 1]) return true;
+        }
+
+        return false;
+    }
+};
+```
+
+The both of the above solution approaches have constant space-complexity. If we consider doing a trade-off between space and time-complexity, we can create a solution having linear time and space-complexity. By using a `HashMap` or `HashSet` we can store the values during the traversal of the array and in each iteration we can check whether the current-value is in the hash-map or not (this check operation can be done in constant time, because we're using hash-map or set here)! If it exists in the hash-map we can return `true`, otherwise return `false`. Let's illustrate the solution approach by an example first -
+
+```
+A = [1,2,3,1]
+Define a Set S
+
+In each iteration we'll do these
+    Check A[i] exists in S
+    [NO] Insert A[i] in the set
+    [YES] return true
+
+i = 0
+S = {1}
+
+i = 1
+S = {1, 2}
+
+i = 2
+S = {1, 2, 3}
+
+i = 3
+return true
+```
+Here's the code -
+
+```cpp
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> S;
+
+        for(int num : nums) {
+            if(S.find(num) == S.end()) S.insert(num);
+            else return true;
+        }
+
+        return false;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+
+### Space Complexity `O(n)`
