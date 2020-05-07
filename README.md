@@ -41,6 +41,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 4. [Number Complement](#4-number-complement)
 5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
 6. [Majority Element](#6-majority-element)
+7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
 ---
 > [blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
@@ -1725,6 +1726,67 @@ Linear time
 
 ### Space Complexity `O(1)`
 Constant space
+
+
+# 7. Cousins in Binary Tree
+
+> Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322/
+
+## Solution Approach
+
+This is a classic tree problem! We can address this problem as a DFS/BFS problem at it's core! Because we have to find two things here, one is that each of the nodes are in the same depth/level of the tree and they don't have the same parent (that's the rule to become cousins, amirite?). To do that we have to traverse the tree, we can either choose DFS or BFS to do the traversal. First, I did a DFS solution approach but later I thought that the BFS would be better because we can early return from the traversal in BFS. We know, in BFS we do level order traversal, so after each level traversal if we get that we have found only one of the elements in this level, that means our two of the nodes are not in the same level. But in DFS we know that we end up traversing to the very deep of a path, so we cannot say before traversing the whole tree that two of our nodes are in same level or not! And to solve the second problem, we have to track the parent of each node and finally check whether they are same or not for the two given nodes!
+
+```cpp
+class Solution {
+public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        queue<pair<TreeNode*, int>> Q;
+        Q.push(make_pair(root, 0));
+
+        int found = 0, parentX = 0, parentY = 0;
+        while(!Q.empty()) {
+            int n = Q.size();
+
+            for(int i = 0; i < n; i++) {
+                pair<TreeNode*, int> entry = Q.front();
+                TreeNode* node = entry.first;
+                int parent = entry.second;
+
+                if(node->val == x) {
+                    parentX = parent;
+                    found++;
+                } else if(node->val == y) {
+                    parentY = parent;
+                    found++;
+                }
+
+                if(node->right != NULL) Q.push(make_pair(node->right, node->val));
+                if(node->left != NULL) Q.push(make_pair(node->left, node->val));
+                Q.pop();
+            }
+
+            switch(found) {
+                case 1:
+                    return false;
+                    break;
+                case 2:
+                    return parentX != parentY;
+                    break;
+            }
+        }
+
+        return false;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+`n` is the number of nodes in the binary tree. In the worst case, we might have to visit all the nodes of the binary tree.
+
+### Space Complexity `O(n)`
+In the worst case, we need to store all the nodes of the last level in the queue. The last level of a binary tree can have a maximum of `n/2` nodes. Also we have to store `parentX`, `parentY` and `found` variables, this will take constant space in term of `n`. That results in a space complexity of `O(n/2 + c) = O(n)`
 
 ---
 
