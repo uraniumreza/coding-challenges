@@ -44,11 +44,12 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
 8. [Check If It Is a Straight Line](#8-check-if-it-is-a-straight-line)
 ---
-> [blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
+> [Blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
 1. [Two Sum](#1-two-sum)
 2. [Best Time to Buy and Sell Stock](#2-best-time-to-buy-and-sell-stock)
 3. [Contains Duplicate](#3-contains-duplicate)
+4. [Product of Array Except Self](#4-product-of-array-except-self)
 
 ---
 
@@ -2086,5 +2087,80 @@ public:
 ## Complexity Analysis
 
 ### Time Complexity `O(n)`
+Linear time
 
 ### Space Complexity `O(n)`
+Linear space
+
+# 4. Product of Array Except Self
+
+> LeetCode: https://leetcode.com/problems/product-of-array-except-self/
+
+> 📘 EPI: Page 40
+
+## Solution Approach
+From the looks of it, this seems like a dead simple problem to solve in linear time and space. We can simply get the product of all the elements in the given array and then, for each of the elements `nums[i]` of the array, we can simply find product of array except self value by dividing the product by the `nums[i]` value.
+
+Doing this for each of the elements would solve the problem. However, there's a note in the problem which says that we are not allowed to use **division** operation. That makes solving this problem a bit harder.
+
+For getting the product of array except self-value of any index `i`, if we can find the product of all number in the left side of `i` and product of all the numbers in the right side of `i`, multiplying both of them will give us the result, let's illustrate this -
+
+```
+nums = [1, 2, 3, 4]
+
+left = [1, 1, 2, 6]
+right = [24, 12, 4, 1]
+
+out = [1, 12, 8, 6]
+```
+To solve this, we need to have two arrays of `n` size to store the products of `left` and `right`. From these we can finally incorporate the `ans`.
+
+```cpp
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> L(n, 0), R(n, 0), ans(n);
+
+        L[0] = 1;
+        for(int i = 1; i < n; i++) L[i] = L[i - 1] * nums[i - 1];
+
+        R[n - 1] = 1;
+        for(int i = n - 2; i >= 0; i--) R[i] = R[i + 1] * nums[i + 1];
+
+        for(int i = 0; i < n; i++) ans[i] = L[i] * R[i];
+
+        return ans;
+    }
+};
+```
+This solution has linear i.e. `O(n)` time and space complexity. If we want to do this in constant space, we can do that by merging the `left` and `right` arrays into our `ans` array! The code is simple, let's look into it -
+
+```cpp
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans(n, 0);
+
+        ans[0] = 1;
+        for(int i = 1; i < n; i++) ans[i] = ans[i - 1] * nums[i - 1];
+
+        int R = 1;
+        for(int i = n - 1; i >= 0; i--) {
+            ans[i] = ans[i] * R;
+            R *= nums[i];
+        }
+
+        return ans;
+     }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time
+
+### Space Complexity `O(1)`
+Constant space
