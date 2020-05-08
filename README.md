@@ -42,6 +42,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
 6. [Majority Element](#6-majority-element)
 7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
+8. [Check If It Is a Straight Line](#8-check-if-it-is-a-straight-line)
 ---
 > [blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
@@ -1787,6 +1788,56 @@ public:
 
 ### Space Complexity `O(n)`
 In the worst case, we need to store all the nodes of the last level in the queue. The last level of a binary tree can have a maximum of `n/2` nodes. Also we have to store `parentX`, `parentY` and `found` variables, this will take constant space in term of `n`. That results in a space complexity of `O(n/2 + c) = O(n)`
+
+# 8. Check If It Is a Straight Line
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3323/
+
+## Solution Approach
+The problem is a bit related to basic concepts 2D geometry. So, we have to identify if the given points can form a straight line or not! To do that we'll use the concept of `slope` from 2D geometry. First, if there are only two given points, without any calculation we can say that these two points are able to form a straight line! So, if we have more than two points given, we'll calculate the slope from first two points and later, traversing through the rest of the points and calculate slope between new two points in each iteration; if the previously calculated slope is mismatched with the `newSlope`, they can't form a straight line.
+
+To calculate the slope between two coordinates in the 2d plane, we use this formula -
+```
+(x1, y1) -> (x2, y2)
+
+slope = | (y2 - y1) / (x2 - x1) |
+```
+We are taking the modulus/abs of the slope because the sign denotes the direction of the slope, we are not aware of the direction for this problem, we only consider that whethere the points are in a straight line or not! Also as you can see that we are dividing by `(x2 - x1)`, so in any point if this value becomes `0` we have to return `Infinity` as slope! For simplicity we are just returning the maximum double i.e. `DBL_MAX` number to identify as `Infinity`!
+
+```cpp
+class Solution {
+public:
+    double getSlope(vector<int> c1, vector<int> c2) {
+        double x = c2[0] - c1[0];
+        double y = c2[1] - c1[1];
+
+        if(x == 0) return DBL_MAX;
+        return abs(y / x);
+    }
+
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        int n = coordinates.size();
+        if(n <= 2) return true;
+
+        double slope = getSlope(coordinates[0], coordinates[1]);
+
+        for(int i = 2; i < n; i++) {
+            double newSlope = getSlope(coordinates[i - 1], coordinates[i]);
+            if(slope != newSlope) return false;
+        }
+
+        return true;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time; only traversing the array once and in each iteration we are calculating the slope; which takes constant time i.e. `O(1)`. So, our whole task takes `O(n)` time, here `n` is the number of given points.
+
+### Space Complexity `O(1)`
+Constant space
 
 ---
 
