@@ -21,7 +21,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 16. [Valid Parenthesis String](#16-valid-parenthesis-string)
 17. [Number of Islands](#17-number-of-slands)
 18. [Minimum Path Sum](#18-minimum-path-sum)
-19. [Search in Rotated Sorted Array](#19-search-in-Rrtated-sorted-array)
+19. [Search in Rotated Sorted Array](#19-search-in-rotated-sorted-array)
 20. [Construct Binary Search Tree from Preorder Traversal](#20-construct-binary-search-tree-from-preorder-traversal)
 21. [Leftmost Column with at Least a One](#21-leftmost-column-with-at-least-a-one)
 22. [Subarray Sum Equals K](#22-subarray-sum-equals-k)
@@ -53,6 +53,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 4. [Product of Array Except Self](#4-product-of-array-except-self)
 5. [Maximum Subarray](#3-maximum-subarray)
 6. [Maximum Product Subarray](#6-maximum-product-subarray)
+7. [Find Minimum in Rotated Sorted Array](#7-find-minimum-in-rotated-sorted-array)
 
 
 ---
@@ -2281,5 +2282,55 @@ public:
 
 ### Time Complexity `O(n)`
 Linear time
+### Space Complexity `O(1)`
+Constant space
+
+# 7. Find Minimum in Rotated Sorted Array
+
+> LeetCode: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+
+## Solution Approach
+This problem is kind of related to the _search in rotated sorted array_! So, we are given a sorted array but rotated! First, we'll try to find the pivot point, where the array is rotated. Finally, the minimum number will be in the `(pivot + 1)`th index because the array is sorted, _amirite_? In the begining we need to check two things, i) if the `low` and `high` are same i.e. the array has only one element or ii) array is not rotated; we will return the first element of the array. Awesome!
+
+For finding the pivot point, we'll use binary-search technique! In each iteration we'll use these conditions and move `low` or `high` indexes accordingly -
+```
+i) if the mid element is bigger than the mid + 1; return mid as pivot-point
+ii) if the mid element is lower than the mid - 1; return mid - 1 as pivot-point
+iii) if the lower element is bigger than the mid element; we'll move the high index to mid - 1;
+iv) if the lower element is lower than the mid element; we'll move the low index to mid + 1
+```
+here's the code -
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int low = 0, high = nums.size() - 1;
+        if(low == high || nums[low] < nums[high]) return nums[0];
+
+        int pivot = findPivot(nums, low, high);
+        return nums[pivot + 1];
+    }
+
+    int findPivot(vector<int>& nums, int low, int high) {
+        while(low <= high) {
+            int mid  = low + (high - low) / 2;
+
+            if(nums[mid] > nums[mid + 1]) return mid;
+            if(nums[mid] < nums[mid - 1]) return mid - 1;
+
+            if(nums[low] < nums[mid]) low = mid + 1;
+            else if(nums[low] > nums[mid]) high = mid - 1;
+        }
+
+        return -1;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(logn)`
+Logarithmic time; we are doing binary-search to search the pivot point and then in constant time we're getting the minimum element of the array
+
 ### Space Complexity `O(1)`
 Constant space
