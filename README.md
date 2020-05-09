@@ -54,6 +54,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 5. [Maximum Subarray](#3-maximum-subarray)
 6. [Maximum Product Subarray](#6-maximum-product-subarray)
 7. [Find Minimum in Rotated Sorted Array](#7-find-minimum-in-rotated-sorted-array)
+8. [Search in Rotated Sorted Array](#19-search-in-rotated-sorted-array)
 
 
 ---
@@ -855,51 +856,81 @@ public:
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3304/
 
 ## Solution Approach
+We are given a sorted array but rotated! First, we'll try to find the pivot point, where the array is rotated, and then we'll search our target using binary-search either in the left or side sub-array of the pivot!
+
+In the begining, we need to check two things, i) if the `low` and `high` are same i.e. the array has only one element, we'll instantly return (if the target and that single element is equal then we'll return 0 otherwise -1) or ii) array is not rotated; we will do binary-search on the whole array. Awesome!
+
+For finding the pivot point, we'll use binary-search technique! In each iteration we'll use these conditions and move `low` or `high` indexes accordingly -
+
+```
+i) if the mid element is bigger than the mid + 1; return mid as pivot-point
+ii) if the mid element is lower than the mid - 1; return mid - 1 as pivot-point
+iii) if the lower element is bigger than the mid element; we'll move the high index to mid - 1;
+iv) if the lower element is lower than the mid element; we'll move the low index to mid + 1
+```
+
+After finding the pivot point, we'll find in which sub-array we'll do the binary-search, by the following logic -
+```
+if the lower element of the given array is bigger then the target that means our target lies in the right-subarray of the pivot and otherewise the left sub-array (including the pivot element)
+```
+here's the code -
 
 
 ```cpp
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int len = nums.size();
+        if(!nums.size()) return -1;
 
-        int pivot = findPivot(nums, target, 0, len - 1);
+        int low = 0, high = nums.size() - 1;
 
-        if(pivot == -1) return binarySearch(nums, target, 0, len - 1);
-        if(nums[pivot] == target) return pivot;
+        if(low == high) return nums[0] == target ? 0 : -1;
+        if(nums[low] < nums[high]) return binarySearch(nums, low, high, target);
 
-        if(nums[0] <= target) return binarySearch(nums, target, 0, pivot - 1);
-        return binarySearch(nums, target, pivot + 1, len - 1);
+        int pivot = findPivot(nums, low, high);
+        if(nums[low] > target) return binarySearch(nums, pivot + 1, high, target);
+        else if(nums[low] <= target) return binarySearch(nums, low, pivot, target);
+
+        return -1;
     }
 
-    int findPivot(vector<int>& nums, int target, int low, int high) {
-        if(low > high) return -1;
+    int binarySearch(vector<int>& nums, int low, int high, int target) {
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
 
-        int mid = low + (high - low) / 2;
-        if(mid < high && nums[mid] > nums[mid + 1]) return mid;
-        if(mid > low && nums[mid - 1] > nums[mid]) return mid - 1;
+            if(nums[mid] == target) return mid;
+            else if(nums[mid] > target) high = mid - 1;
+            else if(nums[mid] < target) low = mid + 1;
+        }
 
-        if(nums[low] > nums[mid]) return findPivot(nums, target, low, mid - 1);
-        return findPivot(nums, target, mid + 1, high);
+        return -1;
     }
 
-    int binarySearch(vector<int>& nums, int target, int low, int high) {
-        if(low > high) return -1;
+    int findPivot(vector<int>& nums, int low, int high) {
+        if(low == high) return -1;
 
-        int mid = low + (high - low) / 2;
-        if(nums[mid] == target) return mid;
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
 
-        if(nums[mid] > target) return binarySearch(nums, target, low, mid - 1);
-        return binarySearch(nums, target, mid + 1, high);
+            if(nums[mid] > nums[mid + 1]) return mid;
+            else if(nums[mid] < nums[mid - 1]) return mid - 1;
+
+            if(nums[low] > nums[mid]) high = mid - 1;
+            else if(nums[low] < nums[mid]) low = mid + 1;
+        }
+
+        return -1;
     }
 };
 ```
 
 ## Complexity Analysis
 
-### Time Complexity `O()`
+### Time Complexity `O(logn)`
+We have done binary-search in finding the pivot and then finding the target
 
-### Space Complexity `O()`
+### Space Complexity `O(1)`
+Constant space; no additional space to solve the problem
 
 # 20. Construct Binary Search Tree from Preorder Traversal
 
