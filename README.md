@@ -43,6 +43,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 6. [Majority Element](#6-majority-element)
 7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
 8. [Check If It Is a Straight Line](#8-check-if-it-is-a-straight-line)
+9. [Valid Perfect Square](#9-valid-perfect-square)
 ---
 > [Blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
@@ -50,6 +51,8 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 2. [Best Time to Buy and Sell Stock](#2-best-time-to-buy-and-sell-stock)
 3. [Contains Duplicate](#3-contains-duplicate)
 4. [Product of Array Except Self](#4-product-of-array-except-self)
+5. [Maximum Subarray](#3-maximum-subarray)
+
 
 ---
 
@@ -1842,6 +1845,88 @@ Constant space
 
 ---
 
+# 9. Valid Perfect Square
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3324/
+
+## Solution Approach
+For `num > 2` the square root is always less than `num / 2` and greater than `1` i.e. the square root will be in this range - `1 < x < num / 2`. Since `x` is an integer, the problem goes down to the search in the sorted set of integer numbers. Binary search is a standard way to proceed in such a situation.
+
+Let's fo through the algorithm -
+
+```
+- if num < 2, return true
+- set the low = 2, and the high = num / 2.
+
+- while left <= right:
+    - take mid = (left + right) / 2 as a guess, compute sqr = mid * mid and compare it with given num:
+
+    - if sqr == num, then the given number is perfect square, return true
+    - if sqr > num, move high to mid - 1
+    - otherwise, move low to mid + 1
+
+if we're here, the number is not a prefect square; return false
+```
+Let's have an example -
+```
+16
+
+i = 0
+    low = 2, high = 8
+    mid = 5
+    sqr = 25
+    sqr > num
+        high = mid - 1 = 4
+
+i = 1
+    low = 2, high = 4
+    mid = 3
+    sqr = 9
+    sqr < num
+        low = mid + 1 = 4
+
+i = 2
+    low = 4, high = 4
+    mid = 4
+    sqr = 16
+    mid == sqr
+        return true
+```
+here's the code -
+```cpp
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        if(num < 2) return true;
+        long long low = 2, high = num / 2, mid, sqr;
+
+        while(low <= high) {
+            mid = low + (high - low) / 2;
+            sqr = mid * mid;
+
+            if(sqr == num) {
+                return true;
+            } else if(sqr > num) {
+                high = mid - 1;
+            } else if (sqr < num) {
+                low = mid + 1;
+            }
+        }
+
+        return false;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(logn)`
+Logarithmic time; as we are running binary search over `n/2`
+
+### Space Complexity `O(1)`
+Constant space, we're not using any extra space
+
+
 # 1. Two Sum
 
 > Problem Description: https://leetcode.com/problems/two-sum/
@@ -2164,3 +2249,4 @@ Linear time
 
 ### Space Complexity `O(1)`
 Constant space
+
