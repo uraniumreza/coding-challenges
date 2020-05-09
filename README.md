@@ -52,6 +52,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 3. [Contains Duplicate](#3-contains-duplicate)
 4. [Product of Array Except Self](#4-product-of-array-except-self)
 5. [Maximum Subarray](#3-maximum-subarray)
+6. [Maximum Product Subarray](#6-maximum-product-subarray)
 
 
 ---
@@ -2250,3 +2251,35 @@ Linear time
 ### Space Complexity `O(1)`
 Constant space
 
+
+# 6. Maximum Product Subarray
+
+> LeetCode: https://leetcode.com/problems/maximum-product-subarray/
+
+## Solution Approach
+This problem is pretty much same as the maximum subarry sum, instead of sum, here we have to find the product/multiplication. For finding the sum, we have to only calculate the max-sum! But here, we have to keep track of both max and min product because two negative numbers can multiply and become a max number from a min number! In each iteration we have to find out the `maxProduct` from the current-number, previous maxProduct multiply by current-number and previous minProduct multiply by current-number. Also we'll update result/ans i.e. maximumProductSubArray in each iteration.
+
+```cpp
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int productMax = 1, productMin = 1, result = INT_MIN;
+
+        for(int n : nums) {
+            int tempProductMax = productMax;
+            productMax = max(max(productMax * n, productMin * n), n);
+            productMin = min(min(tempProductMax * n, productMin * n), n);
+            result = max(result, productMax);
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time
+### Space Complexity `O(1)`
+Constant space
