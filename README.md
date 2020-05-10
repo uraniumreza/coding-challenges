@@ -3,64 +3,64 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 
 # Problems by Collection
 > [April 2020](https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/)
-1. [Single Number](#1-single-number)
-2. [Happy Number](#2-happy-number)
-3. [Maximum Subarray](#3-maximum-subarray)
-4. [Move Zeroes](#4-move-zeroes)
-5. [Best Time to Buy and Sell Stock II](#5-best-time-to-buy-and-sell-stock-II)
-6. [Group Anagrams](#6-group-anagrams)
-7. [Counting Elements](#7-counting-elements)
-8. [Middle of the Linked List](#8-middle-of-the-linked-list)
-9. [Backspace String Compare](#9-backspace-string-compare)
-10. [Min Stack](#10-min-stack)
-11. [Diameter of Binary Tree](#11-diameter-of-binary-tree)
-12. [Last Stone Weight](#12-last-stone-weight)
-13. [Contiguous Array](#13-contiguous-array)
-14. [Perform String Shifts](#14-perform-string-shifts)
-15. [Product of Array Except Self](#15-product-of-array-except-self)
-16. [Valid Parenthesis String](#16-valid-parenthesis-string)
-17. [Number of Islands](#17-number-of-slands)
-18. [Minimum Path Sum](#18-minimum-path-sum)
-19. [Search in Rotated Sorted Array](#19-search-in-rotated-sorted-array)
-20. [Construct Binary Search Tree from Preorder Traversal](#20-construct-binary-search-tree-from-preorder-traversal)
-21. [Leftmost Column with at Least a One](#21-leftmost-column-with-at-least-a-one)
-22. [Subarray Sum Equals K](#22-subarray-sum-equals-k)
-23. [Bitwise AND of Numbers Range](#23-bitwise-and-of-numbers-range)
-24. [LRU Cache](#24-lru-cache)
-25. [Jump Game](#25-jump-game)
-26. [Longest Common Subsequence](#26-longest-common-subsequence)
-27. [Maximal Square](#27-maximal-square)
-28. [First Unique Number](#28-first-unique-number)
-29. [Binary Tree Maximum Path Sum](#29-binary-tree-maximum-path-sum)
-30. [Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](#30-check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree)
+1. [Single Number](#single-number)
+2. [Happy Number](#happy-number)
+3. [Maximum Subarray](#maximum-subarray)
+4. [Move Zeroes](#move-zeroes)
+5. [Best Time to Buy and Sell Stock II](#best-time-to-buy-and-sell-stock-II)
+6. [Group Anagrams](#group-anagrams)
+7. [Counting Elements](#counting-elements)
+8. [Middle of the Linked List](#middle-of-the-linked-list)
+9. [Backspace String Compare](#backspace-string-compare)
+10. [Min Stack](#min-stack)
+11. [Diameter of Binary Tree](#diameter-of-binary-tree)
+12. [Last Stone Weight](#last-stone-weight)
+13. [Contiguous Array](#contiguous-array)
+14. [Perform String Shifts](#perform-string-shifts)
+15. [Product of Array Except Self](#product-of-array-except-self)
+16. [Valid Parenthesis String](#valid-parenthesis-string)
+17. [Number of Islands](#number-of-slands)
+18. [Minimum Path Sum](#minimum-path-sum)
+19. [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
+20. [Construct Binary Search Tree from Preorder Traversal](#construct-binary-search-tree-from-preorder-traversal)
+21. [Leftmost Column with at Least a One](#leftmost-column-with-at-least-a-one)
+22. [Subarray Sum Equals K](#subarray-sum-equals-k)
+23. [Bitwise AND of Numbers Range](#bitwise-and-of-numbers-range)
+24. [LRU Cache](#lru-cache)
+25. [Jump Game](#jump-game)
+26. [Longest Common Subsequence](#longest-common-subsequence)
+27. [Maximal Square](#maximal-square)
+28. [First Unique Number](#first-unique-number)
+29. [Binary Tree Maximum Path Sum](#binary-tree-maximum-path-sum)
+30. [Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](#check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree)
 ---
 > [May 2020](https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/)
-1. [First Bad Version](#1-first-bad-version)
-2. [Jewels and Stones](#2-jewels-and-stones)
-3. [Ransom Note](#3-ransom-note)
-4. [Number Complement](#4-number-complement)
-5. [First Unique Character in a String](#5-first-unique-character-in-a-string)
-6. [Majority Element](#6-majority-element)
-7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
-8. [Check If It Is a Straight Line](#8-check-if-it-is-a-straight-line)
-9. [Valid Perfect Square](#9-valid-perfect-square)
-10. [Find the Town Judge](#10-find-the-town-judge)
+1. [First Bad Version](#first-bad-version)
+2. [Jewels and Stones](#jewels-and-stones)
+3. [Ransom Note](#ransom-note)
+4. [Number Complement](#number-complement)
+5. [First Unique Character in a String](#first-unique-character-in-a-string)
+6. [Majority Element](#majority-element)
+7. [Cousins in Binary Tree](#cousins-in-binary-tree)
+8. [Check If It Is a Straight Line](#check-if-it-is-a-straight-line)
+9. [Valid Perfect Square](#valid-perfect-square)
+10. [Find the Town Judge](#find-the-town-judge)
 ---
 > [Blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
-1. [Two Sum](#1-two-sum)
-2. [Best Time to Buy and Sell Stock](#2-best-time-to-buy-and-sell-stock)
-3. [Contains Duplicate](#3-contains-duplicate)
-4. [Product of Array Except Self](#4-product-of-array-except-self)
-5. [Maximum Subarray](#3-maximum-subarray)
-6. [Maximum Product Subarray](#6-maximum-product-subarray)
-7. [Find Minimum in Rotated Sorted Array](#7-find-minimum-in-rotated-sorted-array)
-8. [Search in Rotated Sorted Array](#19-search-in-rotated-sorted-array)
-
+1. [Two Sum](#two-sum)
+2. [Best Time to Buy and Sell Stock](#best-time-to-buy-and-sell-stock)
+3. [Contains Duplicate](#contains-duplicate)
+4. [Product of Array Except Self](#product-of-array-except-self)
+5. [Maximum Subarray](#maximum-subarray)
+6. [Maximum Product Subarray](#maximum-product-subarray)
+7. [Find Minimum in Rotated Sorted Array](#find-minimum-in-rotated-sorted-array)
+8. [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
+9. [3Sum](#3Sum)
 
 ---
 
-# 1. Single Number
+# Single Number
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3283/
 
@@ -97,7 +97,7 @@ We're traversing the array once, so the worst-case time complexity will be the l
 This solution has constant space complexity as we're using any additional data structure
 
 
-# 2. Happy Number
+# Happy Number
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3284/
 
@@ -146,7 +146,7 @@ But finding the overall time-complexity of the `isHappy()` function seems a bit 
 skipping it for now (will update it later)
 
 
-# 3. Maximum Subarray
+# Maximum Subarray
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3285/
 
@@ -178,7 +178,7 @@ Linear time solution. We are iterating through the array of numbers once, which 
 We are just taking two variables for storing sums, which give us a constant space solution
 
 
-# 4. Move Zeroes
+# Move Zeroes
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3286/
 
@@ -215,7 +215,7 @@ Linear time solution, the length of the given array is `n`
 ### Space Complexity `O(1)`
 Constant space
 
-# 5. Best Time to Buy and Sell Stock II
+# Best Time to Buy and Sell Stock II
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3287/
 
@@ -249,7 +249,7 @@ Linear time
 ### Space Complexity `O(1)`
 Constant space
 
-# 6. Group Anagrams
+# Group Anagrams
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3288/
 
@@ -287,7 +287,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 7. Counting Elements
+# Counting Elements
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3289/
 
@@ -323,7 +323,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 8. Middle of the Linked List
+# Middle of the Linked List
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3290/
 
@@ -356,7 +356,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 9. Backspace String Compare
+# Backspace String Compare
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3291/
 
@@ -402,7 +402,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 10. Min Stack
+# Min Stack
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3292/
 
@@ -455,7 +455,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 11. Diameter of Binary Tree
+# Diameter of Binary Tree
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3293/
 
@@ -490,7 +490,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 12. Last Stone Weight
+# Last Stone Weight
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3297/
 
@@ -545,7 +545,7 @@ Our final loop which iterates over the priority queue runs up to `n - 1` times. 
 ### Space Complexity `O(n)`
 We have linear space complexity here because of declaring `n` sized priority queue.
 
-# 13. Contiguous Array
+# Contiguous Array
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3298/
 
@@ -591,7 +591,7 @@ We're only traversing the array once; so the time complexity will be the length 
 ### Space Complexity `O(n)`
 We've added a hashmap to keep track of our count values and array-indexes. In the worst case where each value of the array is either 0 or 1, then the length of the hashmap will be the length of the array.
 
-# 14. Perform String Shifts
+# Perform String Shifts
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3299/
 
@@ -674,7 +674,7 @@ As we are doing these steps one after the other, and we don't know which one is 
 The first step uses constant extra space to keep track of the counts.
 And also we're doing the string-shift operation in-place by using a mutable string. So, we've taken `O(1)` space-complexity in our solution.
 
-# 15. Product of Array Except Self
+# Product of Array Except Self
 
 > Problem Description: https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3300/
 
@@ -711,7 +711,7 @@ Where `n` represents the number of elements in the input array. We use one itera
 ### Space Complexity `O(n)`
 Two intermediate arrays i.e. `right`, `left` that we constructed to keep track of product of elements to the left and right.
 
-# 16. Valid Parenthesis String
+# Valid Parenthesis String
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3301/
 
@@ -756,7 +756,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 17. Number of Islands
+# Number of Islands
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3302/
 
@@ -808,7 +808,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 18. Minimum Path Sum
+# Minimum Path Sum
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3303/
 
@@ -852,7 +852,7 @@ public:
 ### Space Complexity `O()`
 
 
-# 19. Search in Rotated Sorted Array
+# Search in Rotated Sorted Array
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3304/
 
@@ -933,7 +933,7 @@ We have done binary-search in finding the pivot and then finding the target
 ### Space Complexity `O(1)`
 Constant space; no additional space to solve the problem
 
-# 20. Construct Binary Search Tree from Preorder Traversal
+# Construct Binary Search Tree from Preorder Traversal
 
 > Problem Description:
 
@@ -971,7 +971,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 21. Leftmost Column with at Least a One
+# Leftmost Column with at Least a One
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/530/week-3/3306/
 
@@ -1015,7 +1015,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 22. Subarray Sum Equals K
+# Subarray Sum Equals K
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3307/
 
@@ -1050,7 +1050,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 23. Bitwise AND of Numbers Range
+# Bitwise AND of Numbers Range
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3308/
 
@@ -1079,7 +1079,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 24. LRU Cache
+# LRU Cache
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3309/
 
@@ -1181,7 +1181,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 25. Jump Game
+# Jump Game
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3310/
 
@@ -1212,7 +1212,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 26. Longest Common Subsequence
+# Longest Common Subsequence
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3311/
 
@@ -1260,7 +1260,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 27. Maximal Square
+# Maximal Square
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3312/
 
@@ -1307,7 +1307,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 28. First Unique Number
+# First Unique Number
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3313/
 
@@ -1388,7 +1388,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 29. Binary Tree Maximum Path Sum
+# Binary Tree Maximum Path Sum
 
 > Problem Description:
 
@@ -1421,7 +1421,7 @@ public:
 
 ### Space Complexity `O()`
 
-# 30. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
+# Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
 
 > Problem Description: https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/532/week-5/3315/
 
@@ -1462,7 +1462,7 @@ public:
 
 ---
 
-# 1. First Bad Version
+# First Bad Version
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316/
 
@@ -1499,7 +1499,7 @@ The `binarySearch` will run `log(n)` times in the worst case
 As we are using a recursive solution, the call-stack will use `log(n)` space
 
 
-# 2. Jewels and Stones
+# Jewels and Stones
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
 
@@ -1529,7 +1529,7 @@ Here, `m` is the length of the string `J` and `n` is the length of the string `S
 ### Space Complexity `O(m)`
 We are using an extra data-structure i.e. `set` to store the `jewels`, so that we can find in `constant` time!
 
-# 3. Ransom Note
+# Ransom Note
 
 > Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318/
 
@@ -1569,7 +1569,7 @@ Here, `m`, `n` is the respective size of `ransomNote` and `magazine`. We're loop
 ### Space Complexity `O(n)`
 Additional unordered_map of `n` size to map the magazine characters with their number of occurences in the magazine
 
-# 4. Number Complement
+# Number Complement
 
 > Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3319/
 
@@ -1650,7 +1650,7 @@ public:
 ### Space Complexity `O(1)`
 
 
-# 5. First Unique Character in a String
+# First Unique Character in a String
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3320/
 
@@ -1696,7 +1696,7 @@ Linear time solution; traversing through the string of length `n` and then trave
 We're using a hash-map of size `n` to store the indexes against each character.
 
 
-# 6. Majority Element
+# Majority Element
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
 
@@ -1767,7 +1767,7 @@ Linear time
 Constant space
 
 
-# 7. Cousins in Binary Tree
+# Cousins in Binary Tree
 
 > Problem Description: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322/
 
@@ -1827,7 +1827,7 @@ public:
 ### Space Complexity `O(n)`
 In the worst case, we need to store all the nodes of the last level in the queue. The last level of a binary tree can have a maximum of `n/2` nodes. Also we have to store `parentX`, `parentY` and `found` variables, this will take constant space in term of `n`. That results in a space complexity of `O(n/2 + c) = O(n)`
 
-# 8. Check If It Is a Straight Line
+# Check If It Is a Straight Line
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3323/
 
@@ -1877,7 +1877,7 @@ Linear time; only traversing the array once and in each iteration we are calcula
 ### Space Complexity `O(1)`
 Constant space
 
-# 9. Valid Perfect Square
+# Valid Perfect Square
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3324/
 
@@ -1958,7 +1958,7 @@ Logarithmic time; as we are running binary search over `n/2`
 ### Space Complexity `O(1)`
 Constant space, we're not using any extra space
 
-# 10. Find the Town Judge
+# Find the Town Judge
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3325/
 
@@ -2013,7 +2013,7 @@ We allocated an array of length `N + 1`; to store the count. Because in big-oh n
 
 ---
 
-# 1. Two Sum
+# Two Sum
 
 > Problem Description: https://leetcode.com/problems/two-sum/
 
@@ -2122,7 +2122,7 @@ Linear time; as we need to iterate the whole array in the worst case
 Constant space; no additional data-structure applied
 
 
-# 2. Best Time to Buy and Sell Stock
+# Best Time to Buy and Sell Stock
 
 > Problem Description: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
@@ -2191,7 +2191,7 @@ Linear time solution; only traversing the array
 ### Space Complexity `O(1)`
 Constant space
 
-# 3. Contains Duplicate
+# Contains Duplicate
 
 > Problem Description: https://leetcode.com/problems/contains-duplicate/
 
@@ -2263,7 +2263,7 @@ Linear time
 ### Space Complexity `O(n)`
 Linear space
 
-# 4. Product of Array Except Self
+# Product of Array Except Self
 
 > LeetCode: https://leetcode.com/problems/product-of-array-except-self/
 
@@ -2337,7 +2337,7 @@ Linear time
 Constant space
 
 
-# 6. Maximum Product Subarray
+# Maximum Product Subarray
 
 > LeetCode: https://leetcode.com/problems/maximum-product-subarray/
 
@@ -2369,7 +2369,7 @@ Linear time
 ### Space Complexity `O(1)`
 Constant space
 
-# 7. Find Minimum in Rotated Sorted Array
+# Find Minimum in Rotated Sorted Array
 
 > LeetCode: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 
@@ -2419,3 +2419,50 @@ Logarithmic time; we are doing binary-search to search the pivot point and then 
 ### Space Complexity `O(1)`
 Constant space
 
+# 3Sum
+
+> LeetCode: https://leetcode.com/problems/3sum
+
+> 📘 EPI: 18.4
+
+## Solution Approach
+
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+
+        vector<vector<int>> result;
+        for(int i = 0; i < n && nums[i] <= 0; i++) {
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            sortedThreeSum(nums, i, result);
+        }
+
+        return result;
+    }
+
+    void sortedThreeSum(vector<int>& nums, int i, vector<vector<int>>& result) {
+        int low = i + 1, high = nums.size() - 1;
+
+        while(low < high) {
+            int sum = nums[i] + nums[low] + nums[high];
+            if(sum > 0 || (high < nums.size() - 1 && nums[high] == nums[high + 1])){
+                high--;
+            } else if(sum < 0 || (low > i + 1 && nums[low] == nums[low - 1])) {
+                low++;
+            } else if(sum == 0) {
+                result.push_back({ nums[i], nums[low++], nums[high--] });
+            }
+        }
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O()`
+
+### Space Complexity `O()`
