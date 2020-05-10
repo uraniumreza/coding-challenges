@@ -58,6 +58,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 8. [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
 9. [3Sum](#3Sum)
 10. [Container With Most Water](#container-with-most-water)
+11. [Sum of Two Integers](#sum-of-two-integers)
 
 ---
 
@@ -2536,12 +2537,14 @@ Constant space
 ## Solution Approach
 To solve this problem we'll use the logics behind *Half Adder* and *Carry Look-ahead Adder (CLA)*. Sum of two bits can be obtained by performing `XOR (^)` of the two bits. Carry bit can be obtained by performing `AND (&)` of two bits. And after each XOR and AND operation we'll left-shift the carry by 1 because *CLA* suggests us to add the carry to the next bit! Until there is no carry we'll do the same process.
 
+*N.B. Use unsigned int data-type for carry, it fixes the negative number issue. Fid out, why!!*
+
 ```cpp
 class Solution {
 public:
     int getSum(int a, int b) {
         while(b) {
-            int carry = a & b;
+            unsigned int carry = a & b;
             a = a ^ b;
             b = carry << 1;
         }
