@@ -57,6 +57,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 7. [Find Minimum in Rotated Sorted Array](#find-minimum-in-rotated-sorted-array)
 8. [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
 9. [3Sum](#3Sum)
+10. [Container With Most Water](#container-with-most-water)
 
 ---
 
@@ -2476,3 +2477,52 @@ Our `sortedThreeSum` takes `O(n)` time, and we call it `n` times. Sorting the ar
 
 ### Space Complexity `O(1)`
 Constant space solution
+
+# Container With Most Water
+
+> LinkedIn: https://leetcode.com/problems/container-with-most-water
+
+> 📘 EPI: 18.7
+
+## Solution Approach
+The intuition behind this solution approach is that the area formed between two lines will always be limited by the height of the shorter line. And, the more the distance between the lines, the more will be the area obtained.
+
+This is a two-pointer technique based solution; one pointer at the beginning and another at the end of the array. We'll use `result` variable to store the maximum area obtained till now. In each iteration, we'll find out the area formed between them, update `result` and move the pointers. For finding the area we'll follow this -
+```
+- find the effective-height from the two sticks (minimum height will be effective)
+- find area = effective-heigh x distance-between-two-pointers
+```
+And for moving the pointers we'll follow this algorithm -
+```
+We'll move the pointer which has the shorter-height stick; because by moving the shorter-one we are increasing the chance of increasing the effective-height, and also the area!
+```
+We can apply an early exit strategy, when the given array will have less than two elemments, we can return `0`. Here's the code -
+
+```cpp
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        if(height.size() < 2) return 0;
+
+        int left = 0, right = height.size() - 1;
+        int result = INT_MIN;
+        while(left < right) {
+            int effectiveHeight = min(height[left], height[right]);
+            result = max(result, effectiveHeight * (right - left));
+
+            if(effectiveHeight == height[left]) left++;
+            else if(effectiveHeight == height[right]) right--;
+        }
+
+        return result;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time, we're only traversing the given array
+
+### Space Complexity `O(1)`
+Constant space
