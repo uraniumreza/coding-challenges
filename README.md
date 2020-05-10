@@ -2426,8 +2426,16 @@ Constant space
 > 📘 EPI: 18.4
 
 ## Solution Approach
+This problem is a bit tricky because in the result there cannot be any duplicate entry of `(i, j, k)` which sums `0`. We have already seen an invariant solution approach of solving two sum problem, we can implement that here! First, we'll sort our given array, it'll be easier to remove all the duplicates from a sorted array and also implement 2sum in `O(n)` time-complexity. After that, we'll iterate through the sorted-array. If the current value is greater than `0`, we'll early exit from the loop because remaining values cannot sum to `0` as they all are greater than `0`. Also, if the current value is the same as the one before, we'll skip it; otherwise, we'll call `sortedThreeSum` for the current position `i`. In the `sortedThreeSum` function we'll get two pointers, low = `i + 1` and high = `n - 1`, here n is the size of the given array. We'll run a loop until `low < high`. And in each iteration we'll check these -
 
+```
+- We'll calculate sum = nums[i] + nums[low] + nums[high]
+- If the sum is greater than zero, decrement high. Also decrement high if the value is the same as for high + 1
+- If sum is less than zero, increment low. Also increment low if the value is the same as for low - 1
+- Otherwise, we found a triplet: push it to the result and decrement high, increment low
+```
 
+Here's the code -
 ```cpp
 class Solution {
 public:
@@ -2463,6 +2471,8 @@ public:
 
 ## Complexity Analysis
 
-### Time Complexity `O()`
+### Time Complexity `O(n^2)`
+Our `sortedThreeSum` takes `O(n)` time, and we call it `n` times. Sorting the array takes `O(nlogn)`, so overall complexity is `O(nlogn + n^2)`. This is asymptotically equivalent to `O(n^2)`
 
-### Space Complexity `O()`
+### Space Complexity `O(1)`
+Constant space solution
