@@ -44,6 +44,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 7. [Cousins in Binary Tree](#7-cousins-in-binary-tree)
 8. [Check If It Is a Straight Line](#8-check-if-it-is-a-straight-line)
 9. [Valid Perfect Square](#9-valid-perfect-square)
+10. [Find the Town Judge](#10-find-the-town-judge)
 ---
 > [Blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
@@ -1876,8 +1877,6 @@ Linear time; only traversing the array once and in each iteration we are calcula
 ### Space Complexity `O(1)`
 Constant space
 
----
-
 # 9. Valid Perfect Square
 
 > Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3324/
@@ -1959,6 +1958,60 @@ Logarithmic time; as we are running binary search over `n/2`
 ### Space Complexity `O(1)`
 Constant space, we're not using any extra space
 
+# 10. Find the Town Judge
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3325/
+
+## Solution Approach
+If we go through the problem description carefully, the main points of a person being the judge are these -
+- The town judge trusts *nobody*
+- *Everybody* (except for the town judge) trusts the town judge
+
+So, there are given array of vertices, each vertice looks like this - `[x, y]` which denotes `x` trusts `y`. If we can count the trusts that each person is getting, then we can easily find the judge because everyone except the judge will trust that person. Suppose, we have `N` people, so for being a judge, s/he has to have the trust-count `N - 1`, amirite? Okay, so how are we gonna get that count? It's very simple -
+
+```
+For x trusts y
+i) person[y]++
+ii) person[x]--
+```
+So, basically we are incrementing the count if someone gets a trust or decrement if gives! As the judge won't give any trust to anyone and also gets trust from all persons except him/herself, final count will be `N - 1`.
+
+However, there's an early exit logic we can put here. As we have seen that, a person should get `N - 1` trusts to become a judge. So, our trust array should be atleast `N - 1` in size, otherwise we can say that there is no judge in the community! Here's the code -
+
+```cpp
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        if (trust.length < N - 1) return -1;
+
+        vector<int> person(N + 1, 0);
+        for(auto t : trust) {
+            person[t[1]]++;
+            person[t[0]]--;
+        }
+
+        for(int i = 1; i <= N; i++) {
+            if(person[i] == N - 1) return i;
+        }
+
+        return -1;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(E)`
+We traverse through the `trust` array once. The cost of doing this is `O(E)`. We then loop over the people. The cost of doing this is `O(N)`.
+
+Going through this, it looks like one of those graph problems where the cost is `O(max(N, E) = O(N + E)`. After all, we don't know whether `E` or `N` is the bigger one, right?
+
+However, in the best case where we are doing the early exit, the time-complexity is `O(1)`. And in the worst case, we know that `E ≥ N − 1`. Therefore, in the worst case, `E` has to be bigger, and so we can simply drop the `N`, and final time-complexity would be `O(E)`
+
+### Space Complexity `O(N)`
+We allocated an array of length `N + 1`; to store the count. Because in big-oh notation we drop constants, this leaves us with `O(N)`
+
+---
 
 # 1. Two Sum
 
@@ -2365,3 +2418,4 @@ Logarithmic time; we are doing binary-search to search the pivot point and then 
 
 ### Space Complexity `O(1)`
 Constant space
+
