@@ -59,6 +59,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 9. [3Sum](#3Sum)
 10. [Container With Most Water](#container-with-most-water)
 11. [Sum of Two Integers](#sum-of-two-integers)
+12. [Number of 1 Bits](#number-of-1-bits)
 
 ---
 
@@ -2561,4 +2562,38 @@ Linear time, where `n` is the width of the operands i.e. `a` or `b`
 
 ### Space Complexity `O(1)`
 Constant space
+
+# Number of 1 Bits
+
+> LeetCode: https://leetcode.com/problems/number-of-1-bits
+
+> 📘 EPI: Page 44
+
+## Solution Approach
+We'll find what's in the `LSB` in each iteration we'll right-shift the original number by one bit and again check the `LSB` by doing `AND` operation to 1!
+
+```cpp
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int count = 0;
+
+        while(n) {
+            count += n & 1;
+            n >>= 1;
+        }
+
+        return count;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Liner time, n is the number of bits of the given number
+
+### Space Complexity `O(1)`
+Constant space
+
 
