@@ -2526,3 +2526,36 @@ Linear time, we're only traversing the given array
 
 ### Space Complexity `O(1)`
 Constant space
+
+# Sum of Two Integers
+
+> LeetCode: https://leetcode.com/problems/sum-of-two-integers
+
+> 📘 EPI: 5.5
+
+## Solution Approach
+To solve this problem we'll use the logics behind *Half Adder* and *Carry Look-ahead Adder (CLA)*. Sum of two bits can be obtained by performing `XOR (^)` of the two bits. Carry bit can be obtained by performing `AND (&)` of two bits. And after each XOR and AND operation we'll left-shift the carry by 1 because *CLA* suggests us to add the carry to the next bit! Until there is no carry we'll do the same process.
+
+```cpp
+class Solution {
+public:
+    int getSum(int a, int b) {
+        while(b) {
+            int carry = a & b;
+            a = a ^ b;
+            b = carry << 1;
+        }
+
+        return a;
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Linear time, where `n` is the width of the operands i.e. `a` or `b`
+
+### Space Complexity `O(1)`
+Constant space
+
