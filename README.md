@@ -19,7 +19,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 14. [Perform String Shifts](#perform-string-shifts)
 15. [Product of Array Except Self](#product-of-array-except-self)
 16. [Valid Parenthesis String](#valid-parenthesis-string)
-17. [Number of Islands](#number-of-slands)
+17. [Number of Islands](#number-of-islands)
 18. [Minimum Path Sum](#minimum-path-sum)
 19. [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
 20. [Construct Binary Search Tree from Preorder Traversal](#construct-binary-search-tree-from-preorder-traversal)
@@ -45,6 +45,7 @@ I started this repository as a journal of my [30-Day LeetCoding Challenge](https
 8. [Check If It Is a Straight Line](#check-if-it-is-a-straight-line)
 9. [Valid Perfect Square](#valid-perfect-square)
 10. [Find the Town Judge](#find-the-town-judge)
+11. [Flood Fill](#flood-fill)
 ---
 > [Blind75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU)
 
@@ -677,42 +678,7 @@ As we are doing these steps one after the other, and we don't know which one is 
 The first step uses constant extra space to keep track of the counts.
 And also we're doing the string-shift operation in-place by using a mutable string. So, we've taken `O(1)` space-complexity in our solution.
 
-# Product of Array Except Self
 
-> Problem Description: https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3300/
-
-## Solution Approach
-The problem is easy, right? But yeah the note they gave (not to use division) made the problem a tough one! The idea that we're using here to solve the problem is this - "For every given index, `[i]`, we will make use of the product of all the numbers to the left of it and multiply it by the product of all the numbers to the right. This will give us the product of all the numbers except the one at the given index `[i]`"
-
-We'll use two different arrays to get the products of all the numbers from left and another one for getting the products of all the numbers from right. Before populating `left` and `right` we'll fill the boundary start value with 1; for `left` it'll be `0`<sup>th</sup> index and for `right` it'll be `len - 1`<sup>th</sup> index.
-
-```cpp
-class Solution {
-public:
-    vector<int> productExceptSelf(vector<int>& nums) {
-        int len = nums.size();
-        vector<int> left(len), right(len), result(len);
-
-        left[0] = 1;
-        for(int i = 1; i < len; i++) left[i] = nums[i - 1] * left[i - 1];
-
-        right[len - 1] = 1;
-        for(int i = len - 2; i >= 0; i--) right[i] =  nums[i + 1] * right[i + 1];
-
-        for(int i = 0; i < len; i++) result[i] = left[i] * right[i];
-
-        return result;
-    }
-};
-```
-
-## Complexity Analysis
-
-### Time Complexity `O(n)`
-Where `n` represents the number of elements in the input array. We use one iteration to construct the array `left`, one to construct the array `right` and one last to construct the `result` array using `left` and `right`.
-
-### Space Complexity `O(n)`
-Two intermediate arrays i.e. `right`, `left` that we constructed to keep track of product of elements to the left and right.
 
 # Valid Parenthesis String
 
@@ -2013,6 +1979,55 @@ However, in the best case where we are doing the early exit, the time-complexity
 
 ### Space Complexity `O(N)`
 We allocated an array of length `N + 1`; to store the count. Because in big-oh notation we drop constants, this leaves us with `O(N)`
+
+# Flood Fill
+
+> Problem Description: https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3326/
+
+## Solution Approach
+This is a graph traversal problem. We have to start from the `(sr, sc)` index and change the color of it along with all the adjacent cells to the given `newColor`, recursively! We can solve it using either BFS or DFS; I'm using DFS here. For marking the already colored cells, I've declared a 2D boolean array and after changing a cells color I'll mark `true` in that `colored` array. Here, my `dfs` function is a recursive one, which I'll use to color all the adjacent cells (4 directions) of the `image` 2D array.
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int r = image.size();
+        int c = image[0].size();
+
+        vector<vector<bool>> colored(r);
+        for(int i = 0; i < r; i++) colored[i] = vector<bool>(c, false);
+
+        dfs(image, colored, sr, sc, image[sr][sc], newColor);
+        return image;
+    }
+
+    void dfs(vector<vector<int>>& image, vector<vector<bool>>& colored, int i, int j, int color, int newColor) {
+        int r = image.size();
+        int c = image[0].size();
+        if(i < 0 || i > r - 1
+           || j < 0 || j > c - 1
+           || colored[i][j] != 0
+           || image[i][j] != color) return;
+
+        image[i][j] = newColor;
+        colored[i][j] = true;
+
+        dfs(image, colored, i, j - 1, color, newColor);
+        dfs(image, colored, i, j + 1, color, newColor);
+        dfs(image, colored, i + 1, j, color, newColor);
+        dfs(image, colored, i - 1, j, color, newColor);
+    }
+};
+```
+
+## Complexity Analysis
+
+### Time Complexity `O(n)`
+Where `n` is the number of pixels in the image. We might process every pixel.
+
+### Space Complexity `O(n)`
+The size of the implicit call-stack when calling `dfs` function
+
 
 ---
 
